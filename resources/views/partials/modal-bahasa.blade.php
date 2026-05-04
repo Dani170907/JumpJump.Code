@@ -84,6 +84,8 @@
             bahasa: selectedLanguage
         });
 
+        localStorage.setItem("jumpjump_language", selectedLanguage);
+
         alert(`Selamat datang ${savedName}! Memulai petualangan logika dengan bahasa ${selectedLanguage}.`);
 
         window.location.href = '/map';

@@ -29,49 +29,76 @@
         </a>
 
         <!-- LEVEL 1 -->
-        <button onclick="pilihLevel(1)" class="absolute top-[70%] left-[64%] w-[7%] aspect-square flex items-center justify-center rounded-full bg-[#ff6b4a] hover:bg-[#ff522c] border-[3px] md:border-4 border-[#ffb39e] text-white text-xl md:text-6xl font-bold shadow-[0_4px_0_0_#b52a10] md:shadow-[0_6px_0_0_#b52a10] active:translate-y-[4px] md:active:translate-y-[6px] active:shadow-none transition-all text-outline cursor-pointer z-10">
+        <button id="btn-level-1" onclick="pilihLevel(1)" class="absolute top-[70%] left-[64%] w-[7%] aspect-square flex items-center justify-center rounded-full bg-[#ff6b4a] hover:bg-[#ff522c] border-[3px] md:border-4 border-[#ffb39e] text-white text-xl md:text-6xl font-bold shadow-[0_4px_0_0_#b52a10] md:shadow-[0_6px_0_0_#b52a10] active:translate-y-[4px] md:active:translate-y-[6px] active:shadow-none transition-all text-outline cursor-pointer z-10">
             1
         </button>
 
         <!-- LEVEL 2 -->
-        <button onclick="pilihLevel(2)" class="absolute top-[57%] left-[52.5%] w-[7%] aspect-square flex items-center justify-center rounded-full bg-gray-500 hover:bg-gray-400 border-[3px] md:border-4 border-gray-300 text-gray-200 text-xl md:text-6xl font-bold shadow-[0_4px_0_0_#374151] md:shadow-[0_6px_0_0_#374151] active:translate-y-[4px] md:active:translate-y-[6px] active:shadow-none transition-all text-outline cursor-pointer z-10">
+        <button id="btn-level-2" onclick="pilihLevel(2)" class="absolute top-[57%] left-[52.5%] w-[7%] aspect-square flex items-center justify-center rounded-full bg-gray-500 hover:bg-gray-400 border-[3px] md:border-4 border-gray-300 text-gray-200 text-xl md:text-6xl font-bold shadow-[0_4px_0_0_#374151] md:shadow-[0_6px_0_0_#374151] active:translate-y-[4px] md:active:translate-y-[6px] active:shadow-none transition-all text-outline cursor-pointer z-10">
             2
         </button>
 
         <!-- LEVEL 3 -->
-        <button onclick="pilihLevel(3)" class="absolute top-[32%] left-[66%] w-[7%] aspect-square flex items-center justify-center rounded-full bg-gray-500 hover:bg-gray-400 border-[3px] md:border-4 border-gray-300 text-gray-200 text-xl md:text-6xl font-bold shadow-[0_4px_0_0_#374151] md:shadow-[0_6px_0_0_#374151] active:translate-y-[4px] md:active:translate-y-[6px] active:shadow-none transition-all text-outline cursor-pointer z-10">
+        <button id="btn-level-3" onclick="pilihLevel(3)" class="absolute top-[32%] left-[66%] w-[7%] aspect-square flex items-center justify-center rounded-full bg-gray-500 hover:bg-gray-400 border-[3px] md:border-4 border-gray-300 text-gray-200 text-xl md:text-6xl font-bold shadow-[0_4px_0_0_#374151] md:shadow-[0_6px_0_0_#374151] active:translate-y-[4px] md:active:translate-y-[6px] active:shadow-none transition-all text-outline cursor-pointer z-10">
             3
         </button>
 
         <!-- LEVEL 4 -->
-        <button onclick="pilihLevel(4)" class="absolute top-[16%] left-[51.5%] w-[7%] aspect-square flex items-center justify-center rounded-full bg-gray-500 hover:bg-gray-400 border-[3px] md:border-4 border-gray-300 text-gray-200 text-xl md:text-6xl font-bold shadow-[0_4px_0_0_#374151] md:shadow-[0_6px_0_0_#374151] active:translate-y-[4px] md:active:translate-y-[6px] active:shadow-none transition-all text-outline cursor-pointer z-10">
+        <button id="btn-level-4" onclick="pilihLevel(4)" class="absolute top-[16%] left-[51.5%] w-[7%] aspect-square flex items-center justify-center rounded-full bg-gray-500 hover:bg-gray-400 border-[3px] md:border-4 border-gray-300 text-gray-200 text-xl md:text-6xl font-bold shadow-[0_4px_0_0_#374151] md:shadow-[0_6px_0_0_#374151] active:translate-y-[4px] md:active:translate-y-[6px] active:shadow-none transition-all text-outline cursor-pointer z-10">
             4
         </button>
 
         <!-- LEVEL 5 -->
-        <button onclick="pilihLevel(5)" class="absolute top-[8%] left-[35.5%] w-[7%] aspect-square flex items-center justify-center rounded-full bg-gray-500 hover:bg-gray-400 border-[3px] md:border-4 border-gray-300 text-gray-200 text-xl md:text-6xl font-bold shadow-[0_4px_0_0_#374151] md:shadow-[0_6px_0_0_#374151] active:translate-y-[4px] md:active:translate-y-[6px] active:shadow-none transition-all text-outline cursor-pointer z-10">
+        <button id="btn-level-5" onclick="pilihLevel(5)" class="absolute top-[8%] left-[35.5%] w-[7%] aspect-square flex items-center justify-center rounded-full bg-gray-500 hover:bg-gray-400 border-[3px] md:border-4 border-gray-300 text-gray-200 text-xl md:text-6xl font-bold shadow-[0_4px_0_0_#374151] md:shadow-[0_6px_0_0_#374151] active:translate-y-[4px] md:active:translate-y-[6px] active:shadow-none transition-all text-outline cursor-pointer z-10">
             5
         </button>
 
         <!-- LEVEL 6 -->
-        <button onclick="pilihLevel(6)" class="absolute top-[29%] left-[25.5%] w-[7%] aspect-square flex items-center justify-center rounded-full bg-gray-500 hover:bg-gray-400 border-[3px] md:border-4 border-gray-300 text-gray-200 text-xl md:text-6xl font-bold shadow-[0_4px_0_0_#374151] md:shadow-[0_6px_0_0_#374151] active:translate-y-[4px] md:active:translate-y-[6px] active:shadow-none transition-all text-outline cursor-pointer z-10">
+        <button id="btn-level-6" onclick="pilihLevel(6)" class="absolute top-[29%] left-[25.5%] w-[7%] aspect-square flex items-center justify-center rounded-full bg-gray-500 hover:bg-gray-400 border-[3px] md:border-4 border-gray-300 text-gray-200 text-xl md:text-6xl font-bold shadow-[0_4px_0_0_#374151] md:shadow-[0_6px_0_0_#374151] active:translate-y-[4px] md:active:translate-y-[6px] active:shadow-none transition-all text-outline cursor-pointer z-10">
             6
         </button>
 
         <!-- LEVEL 7 -->
-        <button onclick="pilihLevel(7)" class="absolute top-[56%] left-[31%] w-[7%] aspect-square flex items-center justify-center rounded-full bg-gray-500 hover:bg-gray-400 border-[3px] md:border-4 border-gray-300 text-gray-200 text-xl md:text-6xl font-bold shadow-[0_4px_0_0_#374151] md:shadow-[0_6px_0_0_#374151] active:translate-y-[4px] md:active:translate-y-[6px] active:shadow-none transition-all text-outline cursor-pointer z-10">
+        <button id="btn-level-7" onclick="pilihLevel(7)" class="absolute top-[56%] left-[31%] w-[7%] aspect-square flex items-center justify-center rounded-full bg-gray-500 hover:bg-gray-400 border-[3px] md:border-4 border-gray-300 text-gray-200 text-xl md:text-6xl font-bold shadow-[0_4px_0_0_#374151] md:shadow-[0_6px_0_0_#374151] active:translate-y-[4px] md:active:translate-y-[6px] active:shadow-none transition-all text-outline cursor-pointer z-10">
             7
         </button>
 
     </div>
 
-    <!-- Script Logika Peta -->
+    <!-- Script Logika Peta Dinamis (Per Kategori) -->
     <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // 1. Cek bahasa apa yang sedang dimainkan
+            const selectedLang = localStorage.getItem("jumpjump_language") || "C++";
+
+            // 2. Ambil level tertinggi KHUSUS untuk bahasa tersebut
+            const storageKey = `jumpjump_highest_level_${selectedLang}`;
+            let highestLevel = parseInt(localStorage.getItem(storageKey)) || 1;
+
+            const unlockedClasses = ['bg-[#ff6b4a]', 'hover:bg-[#ff522c]', 'border-[#ffb39e]', 'shadow-[0_4px_0_0_#b52a10]', 'md:shadow-[0_6px_0_0_#b52a10]', 'text-white'];
+            const lockedClasses = ['bg-gray-500', 'hover:bg-gray-400', 'border-gray-300', 'shadow-[0_4px_0_0_#374151]', 'md:shadow-[0_6px_0_0_#374151]', 'text-gray-200'];
+
+            for (let i = 1; i <= 7; i++) {
+                let btn = document.getElementById(`btn-level-${i}`);
+                if (!btn) continue;
+
+                if (i <= highestLevel) {
+                    btn.classList.remove(...lockedClasses);
+                    btn.classList.add(...unlockedClasses);
+                }
+            }
+        });
+
         function pilihLevel(level) {
-            if(level > 1) {
-                alert("WARNING!\nAnda belum bisa memasuki stage ini sebelum menyelesaikan stage sebelumnya.");
+            // Cek lagi secara spesifik saat tombol diklik
+            const selectedLang = localStorage.getItem("jumpjump_language") || "C++";
+            const storageKey = `jumpjump_highest_level_${selectedLang}`;
+            let highestLevel = parseInt(localStorage.getItem(storageKey)) || 1;
+
+            if(level > highestLevel) {
+                alert(`STAGE TERKUNCI!\nSelesaikan stage sebelumnya di bahasa ${selectedLang} untuk membuka jalan ini.`);
             } else {
-                alert(`Memasuki Level ${level}...\nSemangat belajar!`);
+                window.location.href = `/quiz/${level}`;
             }
         }
     </script>

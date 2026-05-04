@@ -9,3 +9,7 @@ Route::get('/', function () {
 Route::get('/map', function () {
     return view('map');
 });
+
+Route::get('/quiz/{level}', function ($level) {
+    return view('quiz', ['level' => $level]);
+});
