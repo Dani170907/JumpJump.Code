@@ -13,7 +13,7 @@
             Pilih bahasa pemprograman <span class="text-gray-800">*</span>
         </h2>
 
-        <!-- Pilihan Bahasa Pemrograman (Radio Buttons) -->
+        <!-- Pilihan Bahasa Pemrograman -->
         <div class="flex flex-col gap-5 pl-2 mb-10">
 
             <!-- Opsi C++ -->
@@ -84,11 +84,9 @@
             bahasa: selectedLanguage
         });
 
-        // Untuk sementara kita beri alert, nantinya ini akan diarahkan (redirect) ke halaman Peta Level
         alert(`Selamat datang ${savedName}! Memulai petualangan logika dengan bahasa ${selectedLanguage}.`);
 
-        // Contoh redirect jika halamannya sudah ada:
-        // window.location.href = '/map';
+        window.location.href = '/map';
     }
 </script>
 @endpush

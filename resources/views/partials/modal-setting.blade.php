@@ -42,7 +42,7 @@
                 <!-- hidden checkbox as toggle driver -->
                 <input type="checkbox" id="audioToggle" class="sr-only peer" checked>
                 <!-- Toggle Track & Circle -->
-                <div class="w-16 h-8 bg-gray-300 rounded-full peer peer-checked:after:translate-x-full peer-checked:bg-red-500 after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:bg-white after:rounded-full after:h-6 after:w-6 after:transition-all after:duration-300 after:shadow-sm"></div>
+            <div class="w-14 h-8 bg-gray-300 rounded-full peer peer-checked:bg-red-500 after:content-[''] after:absolute after:top-[4px] after:left-[4px] after:bg-white after:rounded-full after:h-6 after:w-6 after:transition-all after:duration-300 after:shadow-sm peer-checked:after:translate-x-[105%]"></div>
             </label>
         </div>
 
