@@ -53,8 +53,14 @@
             alert("Nama tidak boleh kosong!");
             return;
         }
+
         localStorage.setItem("jumpjump_username", username);
-        alert("Halo " + username + ", lanjut ke pop-up bahasa?");
+
+        closeModal();
+
+        setTimeout(() => {
+            openBahasaModal();
+        }, 300);
     }
 </script>
 @endpush

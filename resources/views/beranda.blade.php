@@ -40,6 +40,7 @@
     </div>
     @include('partials.modal-nama')
     @include('partials.modal-setting')
+    @include('partials.modal-bahasa')
 
     @stack('scripts')
 </body>
