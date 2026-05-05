@@ -19,6 +19,8 @@ return new class extends Migration
             $table->text('question_text');
             $table->text('options')->nullable();
             $table->string('correct_answer');
+            $table->text('penjelasan')->nullable();
+            $table->index(['language', 'level']);
         });
     }
 
