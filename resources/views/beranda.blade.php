@@ -14,7 +14,7 @@
     </style>
 </head>
 <body class="bg-blue-300 min-h-screen flex items-center justify-center bg-cover bg-center" style="background-image: url('{{ asset('images/bg-main.png') }}');">
-
+<x-alert /> 
     <div class="text-center w-full max-w-5xl px-4">
 
         <!-- Judul/Banner -->

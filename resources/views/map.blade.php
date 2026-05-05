@@ -17,6 +17,26 @@
 
 <!-- Body diberi bg-gray-900 (area gelap) jika layar tidak rasio 16:9 -->
 <body class="bg-gray-900 h-screen w-screen overflow-hidden flex items-center justify-center">
+    <!-- PENANGKAP PESAN ERROR DARI LARAVEL -->
+    @if(session('error'))
+    <div id="pesanSistem" class="absolute top-10 left-1/2 transform -translate-x-1/2 bg-red-600 border-4 border-red-900 text-white px-6 py-3 rounded-xl z-50 shadow-[0_6px_0_0_#450a0a] text-xl md:text-3xl tracking-widest animate-bounce flex items-center gap-3">
+        <span>⚠️</span> {{ session('error') }}
+    </div>
+
+    <script>
+        // Menghilangkan pesan secara otomatis setelah 3.5 detik
+        setTimeout(() => {
+            const pesan = document.getElementById('pesanSistem');
+            if(pesan) {
+                pesan.style.transition = "opacity 0.5s ease";
+                pesan.style.opacity = "0";
+                setTimeout(() => pesan.remove(), 500); // Hapus dari DOM setelah pudar
+            }
+        }, 3500);
+    </script>
+    @endif
+
+    <x-alert />
 
     <div class="relative w-[95%] md:w-full aspect-video max-h-screen max-w-[calc(100vh*16/9)] bg-cover bg-center rounded-2xl md:rounded-[2.5rem] border-4 md:border-8 border-gray-800 shadow-[0_0_40px_rgba(0,0,0,0.8)] overflow-hidden"
          style="background-image: url('{{ asset('images/map-level.png') }}');">
@@ -27,42 +47,34 @@
         <a href="/" class="absolute top-4 left-4 md:top-6 md:left-8 bg-red-500 hover:bg-red-600 border-4 border-red-800 text-white px-4 py-1 md:px-6 md:py-2 rounded-full text-lg md:text-2xl z-10 shadow-[0_4px_0_0_#b52a10] active:translate-y-[4px] active:shadow-none transition-all text-outline cursor-pointer">
             &larr; BACK
         </a>
-
         <!-- LEVEL 1 -->
         <button id="btn-level-1" onclick="pilihLevel(1)" class="absolute top-[70%] left-[64%] w-[7%] aspect-square flex items-center justify-center rounded-full bg-[#ff6b4a] hover:bg-[#ff522c] border-[3px] md:border-4 border-[#ffb39e] text-white text-xl md:text-6xl font-bold shadow-[0_4px_0_0_#b52a10] md:shadow-[0_6px_0_0_#b52a10] active:translate-y-[4px] md:active:translate-y-[6px] active:shadow-none transition-all text-outline cursor-pointer z-10">
             1
         </button>
-
         <!-- LEVEL 2 -->
         <button id="btn-level-2" onclick="pilihLevel(2)" class="absolute top-[57%] left-[52.5%] w-[7%] aspect-square flex items-center justify-center rounded-full bg-gray-500 hover:bg-gray-400 border-[3px] md:border-4 border-gray-300 text-gray-200 text-xl md:text-6xl font-bold shadow-[0_4px_0_0_#374151] md:shadow-[0_6px_0_0_#374151] active:translate-y-[4px] md:active:translate-y-[6px] active:shadow-none transition-all text-outline cursor-pointer z-10">
             2
         </button>
-
         <!-- LEVEL 3 -->
         <button id="btn-level-3" onclick="pilihLevel(3)" class="absolute top-[32%] left-[66%] w-[7%] aspect-square flex items-center justify-center rounded-full bg-gray-500 hover:bg-gray-400 border-[3px] md:border-4 border-gray-300 text-gray-200 text-xl md:text-6xl font-bold shadow-[0_4px_0_0_#374151] md:shadow-[0_6px_0_0_#374151] active:translate-y-[4px] md:active:translate-y-[6px] active:shadow-none transition-all text-outline cursor-pointer z-10">
             3
         </button>
-
         <!-- LEVEL 4 -->
         <button id="btn-level-4" onclick="pilihLevel(4)" class="absolute top-[16%] left-[51.5%] w-[7%] aspect-square flex items-center justify-center rounded-full bg-gray-500 hover:bg-gray-400 border-[3px] md:border-4 border-gray-300 text-gray-200 text-xl md:text-6xl font-bold shadow-[0_4px_0_0_#374151] md:shadow-[0_6px_0_0_#374151] active:translate-y-[4px] md:active:translate-y-[6px] active:shadow-none transition-all text-outline cursor-pointer z-10">
             4
         </button>
-
         <!-- LEVEL 5 -->
         <button id="btn-level-5" onclick="pilihLevel(5)" class="absolute top-[8%] left-[35.5%] w-[7%] aspect-square flex items-center justify-center rounded-full bg-gray-500 hover:bg-gray-400 border-[3px] md:border-4 border-gray-300 text-gray-200 text-xl md:text-6xl font-bold shadow-[0_4px_0_0_#374151] md:shadow-[0_6px_0_0_#374151] active:translate-y-[4px] md:active:translate-y-[6px] active:shadow-none transition-all text-outline cursor-pointer z-10">
             5
         </button>
-
         <!-- LEVEL 6 -->
         <button id="btn-level-6" onclick="pilihLevel(6)" class="absolute top-[29%] left-[25.5%] w-[7%] aspect-square flex items-center justify-center rounded-full bg-gray-500 hover:bg-gray-400 border-[3px] md:border-4 border-gray-300 text-gray-200 text-xl md:text-6xl font-bold shadow-[0_4px_0_0_#374151] md:shadow-[0_6px_0_0_#374151] active:translate-y-[4px] md:active:translate-y-[6px] active:shadow-none transition-all text-outline cursor-pointer z-10">
             6
         </button>
-
         <!-- LEVEL 7 -->
         <button id="btn-level-7" onclick="pilihLevel(7)" class="absolute top-[56%] left-[31%] w-[7%] aspect-square flex items-center justify-center rounded-full bg-gray-500 hover:bg-gray-400 border-[3px] md:border-4 border-gray-300 text-gray-200 text-xl md:text-6xl font-bold shadow-[0_4px_0_0_#374151] md:shadow-[0_6px_0_0_#374151] active:translate-y-[4px] md:active:translate-y-[6px] active:shadow-none transition-all text-outline cursor-pointer z-10">
             7
         </button>
-
     </div>
 
     <!-- Script Logika Peta Dinamis (Per Kategori) -->
@@ -89,16 +101,32 @@
             }
         });
 
-        function pilihLevel(level) {
-            // Cek lagi secara spesifik saat tombol diklik
+        async function pilihLevel(level) {
             const selectedLang = localStorage.getItem("jumpjump_language") || "C++";
             const storageKey = `jumpjump_highest_level_${selectedLang}`;
             let highestLevel = parseInt(localStorage.getItem(storageKey)) || 1;
 
+            // 1. Cek apakah level masih terkunci
             if(level > highestLevel) {
-                alert(`STAGE TERKUNCI!\nSelesaikan stage sebelumnya di bahasa ${selectedLang} untuk membuka jalan ini.`);
-            } else {
-                window.location.href = `/quiz/${level}`;
+                return showCustomAlert(`STAGE TERKUNCI! Selesaikan stage sebelumnya.`, 'warning');
+            }
+
+            // 2. Jika level sudah terbuka, lakukan pengecekan ke Database
+            try {
+                // Memanggil Route pengecekan di Laravel
+                let response = await fetch(`/check-stage/${selectedLang}/${level}`);
+                let data = await response.json();
+
+                // Jika true (soal ada di database)
+                if (data.exists) {
+                    window.location.href = `/quiz/${selectedLang}/${level}`;
+                } else {
+                    // Jika false (soal belum dibuat), tampilkan alert tanpa refresh!
+                    showCustomAlert(`Stage ${level} untuk bahasa ${selectedLang} belum dibuat!`, 'error');
+                }
+            } catch (error) {
+                // Jika terjadi error koneksi ke server
+                showCustomAlert("Terjadi kesalahan koneksi sistem.", 'error');
             }
         }
     </script>

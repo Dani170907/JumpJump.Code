@@ -76,19 +76,32 @@
     }
 
     function goToGameMap() {
-        const selectedLanguage = document.querySelector('input[name="programming_language"]:checked').value;
+        // Ambil bahasa yang dipilih
+        const selectedLanguageInput = document.querySelector('input[name="programming_language"]:checked');
         const savedName = localStorage.getItem("jumpjump_username");
 
-        console.log("Mulai Game:", {
-            nama: savedName,
-            bahasa: selectedLanguage
-        });
+        // 1. Validasi: Pastikan nama sudah diisi sebelumnya
+        if (!savedName || savedName.trim() === "") {
+            return showCustomAlert("Nama pemain tidak boleh kosong!", "warning");
+        }
 
+        // 2. Validasi: Pastikan bahasa sudah dipilih
+        if (!selectedLanguageInput) {
+             return showCustomAlert("Pilih bahasa pemrograman terlebih dahulu!", "warning");
+        }
+
+        const selectedLanguage = selectedLanguageInput.value;
+
+        // Simpan bahasa ke LocalStorage
         localStorage.setItem("jumpjump_language", selectedLanguage);
 
-        alert(`Selamat datang ${savedName}! Memulai petualangan logika dengan bahasa ${selectedLanguage}.`);
+        // 3. Tampilkan pesan sukses
+        showCustomAlert(`Welcome ${savedName}! Loading ${selectedLanguage} module...`, "success");
 
-        window.location.href = '/map';
+        // 4. Beri jeda sedikit agar pesan sukses terbaca sebelum pindah halaman
+        setTimeout(() => {
+            window.location.href = '/map';
+        }, 1500);
     }
 </script>
 @endpush

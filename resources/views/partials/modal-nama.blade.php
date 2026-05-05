@@ -49,8 +49,9 @@
 
     function goToNextStep() {
         const username = inputField.value.trim();
+
         if (username === "") {
-            alert("Nama tidak boleh kosong!");
+            showCustomAlert("Nama karakter tidak boleh kosong!", "warning");
             return;
         }
 
