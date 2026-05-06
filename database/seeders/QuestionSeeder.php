@@ -26,7 +26,7 @@ class QuestionSeeder extends Seeder
                 'correct_answer' => '0',
                 'penjelasan' => 'Di C++, untuk mencetak teks ke layar, kita menggunakan objek cout dengan operator <<. Jadi, sintaks yang benar adalah cout << "Belajar C++";'
             ],
-            
+
             [
                 'language' => 'HTML', 'level' => 1,
                 'question_text' => 'Tag HTML mana yang digunakan untuk membuat judul utama?',
@@ -67,6 +67,16 @@ class QuestionSeeder extends Seeder
                 'options' => null,
                 'correct_answer' => 'href', // Jawaban yang harus diketik pemain
                 'penjelasan' => 'Atribut href digunakan untuk menentukan URL tujuan link.'
+            ],
+            [
+                'language' => 'HTML', 'level' => 3,
+                'question_text' => 'Apa baris kode HTML yang benar untuk membuat tombol dengan teks "Submit"?',
+                'options' => json_encode([
+                    '<button>Submit</button>', '<input type="button" value="Submit">',
+                    '<input type="submit" value="Submit">', '<button type="submit">Submit</button>'
+                    ]),
+                'correct_answer' => '2',
+                'penjelasan' => 'Untuk membuat tombol yang berfungsi sebagai submit, kita menggunakan tag <input> dengan atribut type="submit". Jadi, baris kode yang benar adalah <input type="submit" value="Submit">'
             ],
 
             [
