@@ -1,4 +1,3 @@
-
 window.showCustomAlert = function(pesan, tipe = 'error') {
     const box = document.getElementById('jsAlert');
     const icon = document.getElementById('jsAlertIcon');

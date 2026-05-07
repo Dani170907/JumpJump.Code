@@ -16,6 +16,7 @@ return new class extends Migration
             $table->timestamps();
             $table->string('language');
             $table->string('level');
+            $table->string('type')->default('pilihan_ganda');
             $table->text('question_text');
             $table->text('options')->nullable();
             $table->string('correct_answer');

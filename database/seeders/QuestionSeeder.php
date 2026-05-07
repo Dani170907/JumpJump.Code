@@ -15,79 +15,69 @@ class QuestionSeeder extends Seeder
     {
         $questions = [
             [
-                'language' => 'C++', 'level' => 1,
-                'question_text' => 'Bagaimana cara mencetak teks \'Belajar C++\' ke layar di bahasa C++?',
-                'options' => json_encode([
-                    'Cetak teks dengan cout << "Belajar C++";',
-                    'Cetak teks dengan printf("Belajar C++");',
-                    'Cetak teks dengan write("Belajar C++");',
-                    'Cetak teks dengan print("Belajar C++");'
-                    ]),
-                'correct_answer' => '0',
-                'penjelasan' => 'Di C++, untuk mencetak teks ke layar, kita menggunakan objek cout dengan operator <<. Jadi, sintaks yang benar adalah cout << "Belajar C++";'
+            'language' => 'C++',
+            'level' => 1,
+            'type' => 'isian',
+            'question_text' => "Apa output dari kode berikut?\n\n```cpp\n#include <iostream>\nusing namespace std;\n\nint main() {\n    int x = 5;\n    cout << x;\n    return 0;\n}\n```",
+            'options' => json_encode([]),
+            'correct_answer' => '5',
+            'penjelasan' => 'Variabel x diinisialisasi dengan nilai 5, dan cout digunakan untuk mencetak nilai x ke layar.'
             ],
 
             [
-                'language' => 'HTML', 'level' => 1,
-                'question_text' => 'Tag HTML mana yang digunakan untuk membuat judul utama?',
-                'options' => json_encode([
-                    '<p>', '<div>', '<h1>', '<span>'
-                    ]),
-                'correct_answer' => '2',
-                'penjelasan' => 'Tag <h1> digunakan untuk membuat judul utama'
+            'language' => 'HTML',
+            'level' => 3,
+            'type' => 'isian',
+            'question_text' => "Apa tag HTML yang digunakan untuk membuat judul?\n\nA. <h1>\nB. <title>\nC. <head>\nD. <header>",
+            'options' => json_encode(['A. <h1>', 'B. <title>', 'C. <head>', 'D. <header>']),
+            'correct_answer' => '0',
+            'penjelasan' => 'Tag <h1> digunakan untuk membuat judul utama dalam HTML.'
             ],
             [
-                'language' => 'HTML', 'level' => 1,
-                'question_text' => 'Tag HTML mana yang digunakan untuk membuat paragraf?',
-                'options' => json_encode([
-                    '<p>', '<div>', '<span>', '<h1>'
-                    ]),
-                'correct_answer' => '0',
-                'penjelasan' => 'Tag <p> digunakan untuk membuat paragraf dalam HTML.'
+            'language' => 'HTML',
+            'level' => 4,
+            'type' => 'pilihan_ganda',
+            'question_text' => "Tag HTML mana yang digunakan untuk membuat tautan (link)?\n\nA. <a>\nB. <link>\nC. <href>\nD. <url>",
+            'options' => json_encode(['A. <a>', 'B. <link>', 'C. <href>', 'D. <url>']),
+            'correct_answer' => '0',
+            'penjelasan' => 'Tag <a> digunakan untuk membuat tautan (link) dalam HTML.'
             ],
             [
-                'language' => 'HTML', 'level' => 1,
-                'question_text' => 'Tag HTML mana yang digunakan untuk membuat daftar tidak berurutan?',
-                'options' => json_encode([
-                    '<ul>', '<ol>', '<li>', '<dl>'
-                    ]),
-                'correct_answer' => '0',
-                'penjelasan' => 'Tag <ul> digunakan untuk membuat daftar tidak berurutan (unordered list) dalam HTML.'
-            ],
-            [
-                'language' => 'HTML', 'level' => 2,
-                'question_text' => 'Lengkapi tag berikut untuk membuat gambar! <img ____="gambar.jpg" alt="Deskripsi Gambar">',
-                'options' => null,
-                'correct_answer' => 'src',
-                'penjelasan' => 'Atribut src digunakan untuk menentukan path gambar yang ingin ditampilkan.'
-            ],
-            [
-                'language' => 'HTML', 'level' => 2,
-                'question_text' => 'Lengkapi atribut berikut untuk membuat link! <a ____="https://web.com">Klik</a>',
-                'options' => null,
-                'correct_answer' => 'href', // Jawaban yang harus diketik pemain
-                'penjelasan' => 'Atribut href digunakan untuk menentukan URL tujuan link.'
-            ],
-            [
-                'language' => 'HTML', 'level' => 3,
-                'question_text' => 'Apa baris kode HTML yang benar untuk membuat tombol dengan teks "Submit"?',
-                'options' => json_encode([
-                    '<button>Submit</button>', '<input type="button" value="Submit">',
-                    '<input type="submit" value="Submit">', '<button type="submit">Submit</button>'
-                    ]),
-                'correct_answer' => '2',
-                'penjelasan' => 'Untuk membuat tombol yang berfungsi sebagai submit, kita menggunakan tag <input> dengan atribut type="submit". Jadi, baris kode yang benar adalah <input type="submit" value="Submit">'
+            'language' => 'HTML',
+            'level' => 5,
+            'type' => 'isian',
+            'question_text' => "Perhatikan struktur tabel berikut. Lengkapi bagian yang kosong (___) agar sel 'Data 2' menggabungkan dua kolom sekaligus:\n\n```html\n<table border=\"1\">\n    <thead>\n        <tr>\n            <th>Kolom A</th>\n            <th>Kolom B</th>\n        </tr>\n    </thead>\n    <tbody>\n        <tr>\n            <td>Data 1</td>\n            <td>Data 2</td>\n        </tr>\n        <tr>\n            \n            <td ___=\"2\">Data Gabungan</td>\n        </tr>\n    </tbody>\n</table>\n```",
+            'options' => json_encode([]),
+            'correct_answer' => 'colspan',
+            'penjelasan' => 'Atribut colspan digunakan dalam tag <td> atau <th> untuk menggabungkan beberapa kolom menjadi satu sel.'
             ],
 
             [
-                'language' => 'PYTHON', 'level' => 1,
-                'question_text' => 'Bagaimana cara mendefinisikan fungsi di Python?',
-                'options' => json_encode([
-                    'def nama_fungsi():', 'function nama_fungsi() { }',
-                    'func nama_fungsi() { }', 'function nama_fungsi():'
-                    ]),
-                'correct_answer' => '0',
-                'penjelasan' => 'Di Python, fungsi didefinisikan menggunakan kata kunci def diikuti dengan nama fungsi dan tanda kurung. Jadi, sintaks yang benar adalah def nama_fungsi():'
+            'language' => 'Python',
+            'level' => 1,
+            'type' => 'pilihan_ganda',
+            'question_text' => "Apa output dari kode berikut?\n\n```python\nx = 3\ny = 4\nprint(x * y)\n```",
+            'options' => json_encode(['A. 7', 'B. 12', 'C. 1', 'D. Error']),
+            'correct_answer' => '1',
+            'penjelasan' => 'Operator * digunakan untuk perkalian. 3 * 4 menghasilkan 12.'
+            ],
+            [
+            'language' => 'Python',
+            'level' => 2,
+            'type' => 'isian',
+            'question_text' => "Lengkapi kode berikut agar mencetak 'Python Rocks!':\n\n```python\n___ = 'Python Rocks!'\nprint(message)\n```",
+            'options' => json_encode([]),
+            'correct_answer' => 'message',
+            'penjelasan' => 'Variabel message diinisialisasi dengan string "Python Rocks!" dan kemudian dicetak menggunakan print.'
+            ],
+            [
+            'language' => 'Python',
+            'level' => 3,
+            'type' => 'pilihan_ganda',
+            'question_text' => "Apa output dari kode berikut?\n\n```python\na = 10\nb = 5\nprint(a + b)\n```",
+            'options' => json_encode(['A. 15', 'B. 5', 'C. 10', 'D. Error']),
+            'correct_answer' => '0',
+            'penjelasan' => 'Operator + digunakan untuk penjumlahan. 10 + 5 menghasilkan 15.'
             ],
         ];
         DB::table('questions')->insert($questions);
