@@ -126,14 +126,15 @@ class GameController extends Controller
             $response = null;
 
             foreach ($apiKeys as $key) {
-                // 1. UBAH NAMA MODEL MENJADI gemini-pro
-                $url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=" . trim($key);
+                // KITA GUNAKAN MODEL GEMINI TERBARU DARI DAFTAR ANDA
+                $url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" . trim($key);
 
                 $response = Http::withHeaders([
                     'Content-Type' => 'application/json',
                 ])->post($url, [
-                    // 2. HAPUS BAGIAN generationConfig KARENA GEMINI-PRO TIDAK MENDUKUNGNYA
-                    'contents' => [['parts' => [['text' => $prompt]]]]
+                    'contents' => [['parts' => [['text' => $prompt]]]],
+                    // Fitur paksaan JSON kita aktifkan kembali!
+                    'generationConfig' => ['response_mime_type' => 'application/json']
                 ]);
 
                 if ($response->successful() || $response->status() !== 429) {
@@ -143,16 +144,12 @@ class GameController extends Controller
 
             if ($response && $response->successful()) {
                 $aiText = $response->json('candidates.0.content.parts.0.text');
-
-                // Tambahan pengaman: Terkadang gemini-pro masih bandel memberikan markdown ```json ... ```
-                // Kita bersihkan dulu teksnya sebelum di-decode
-                $cleanAiText = str_replace(['```json', '```'], '', $aiText);
-                $aiResult = json_decode(trim($cleanAiText), true);
+                $aiResult = json_decode($aiText, true);
 
                 return response()->json([
                     'is_correct' => $aiResult['is_correct'] ?? false,
                     'method' => 'ai_evaluation',
-                    'feedback' => $aiResult['feedback'] ?? 'Analisis kode oleh AI selesai.'
+                    'feedback' => $aiResult['feedback'] ?? 'Analisis logika selesai.'
                 ]);
             } else {
                 $pesanErrorGoogle = $response ? $response->body() : 'Tidak ada respon dari server';
@@ -160,7 +157,7 @@ class GameController extends Controller
             }
 
         } catch (\Exception $e) {
-            // Biarkan mode DEBUG menyala dulu sampai kita yakin berhasil
+            // JIKA SUDAH BERHASIL, UBAH TEKS INI KEMBALI SEPERTI SEMULA
             return response()->json([
                 'is_correct' => false,
                 'method' => 'fallback_error',

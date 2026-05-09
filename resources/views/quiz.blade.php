@@ -11,6 +11,21 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/prism-themes/1.9.0/prism-vsc-dark-plus.min.css" rel="stylesheet" />
 
 <style>
+/* Memaksa ukuran font PrismJS (Sintaks Kode) mengecil di semua perangkat */
+    pre[class*="language-"],
+    code[class*="language-"] {
+        font-size: 13px !important; /* Ukuran dasar sangat kecil */
+        line-height: 1.5 !important;
+    }
+
+    /* Ukuran khusus untuk Tablet (md) ke atas */
+    @media (min-width: 768px) {
+        pre[class*="language-"],
+        code[class*="language-"] {
+            font-size: 15px !important; /* Sedikit membesar di tablet, tapi tetap proporsional */
+            padding: 1rem !important;
+        }
+    }
         /* 1. BASE LAYOUT KODE (SOLUSI FINAL PASTI RAPI) */
         .question-content pre {
             background-color: #23262E !important;
@@ -339,14 +354,21 @@
     </div>
 </div>
 
-    <div class="h-12 md:h-16 lg:h-20 bg-white border-b-4 lg:border-b-8 border-gray-300 flex items-center justify-between px-3 md:px-6 z-20 shadow-md shrink-0">
-        <a href="/map" class="text-gray-600 hover:text-red-500 text-base md:text-2xl lg:text-3xl tracking-widest font-bold transition-all hover:scale-105 cursor-pointer flex items-center gap-1 md:gap-2">
-            <span class="bg-gray-200 px-2 py-0.5 md:px-3 md:py-1 rounded border-b-2 lg:border-b-4 border-gray-400 active:border-b-0 active:translate-y-1">ESC</span> <span class="hidden sm:inline">RUN</span>
+    <div class="h-12 md:h-14 lg:h-16 bg-white border-b-[3px] md:border-b-4 border-gray-300 flex items-center justify-between px-3 md:px-6 z-20 shadow-md shrink-0">
+        <a href="/map" class="text-gray-600 hover:text-red-500 text-sm md:text-lg lg:text-xl tracking-widest font-bold transition-all hover:scale-105 cursor-pointer flex items-center gap-1 md:gap-2">
+            <span class="bg-gray-200 px-2 md:px-2.5 py-0.5 rounded border-b-2 border-gray-400 active:border-b-0 active:translate-y-[2px]">ESC</span> <span class="hidden sm:inline">RUN</span>
         </a>
-        <div class="flex items-center gap-2 md:gap-4">
-            <div id="hpContainer" class="bg-red-50 border-2 lg:border-4 border-red-200 px-2 md:px-4 py-1 md:py-2 rounded-xl text-base md:text-xl lg:text-3xl flex gap-1 items-center shadow-inner transition-transform duration-300"></div>
-            <div class="hidden sm:block bg-yellow-400 border-2 lg:border-4 border-yellow-600 px-3 md:px-5 py-1 rounded-xl text-yellow-900 font-bold text-sm md:text-lg lg:text-2xl tracking-widest shadow-[0_2px_0_0_#854d0e]">STAGE <span class="text-white drop-shadow-md text-base md:text-xl lg:text-3xl">{{ $level }}</span></div>
-            <div class="bg-blue-400 border-2 lg:border-4 border-blue-600 px-3 md:px-5 py-1 rounded-xl text-white font-bold text-sm md:text-lg lg:text-2xl tracking-widest shadow-[0_2px_0_0_#1e3a8a] uppercase">{{ $language }}</div>
+
+        <div class="flex items-center gap-2 md:gap-3 lg:gap-4">
+            <div id="hpContainer" class="bg-red-50 border-2 border-red-200 px-2 md:px-3 py-1 rounded-xl text-sm md:text-base lg:text-lg flex gap-1 items-center shadow-inner transition-transform duration-300"></div>
+
+            <div class="hidden sm:flex items-center gap-1.5 bg-yellow-400 border-2 border-yellow-600 px-3 md:px-4 py-1 md:py-1.5 rounded-xl text-yellow-900 font-bold text-xs md:text-sm lg:text-base tracking-widest shadow-[0_2px_0_0_#854d0e]">
+                STAGE <span class="text-white drop-shadow-md text-sm md:text-base lg:text-lg">{{ $level }}</span>
+            </div>
+
+            <div class="bg-blue-400 border-2 border-blue-600 px-3 md:px-4 py-1 md:py-1.5 rounded-xl text-white font-bold text-xs md:text-sm lg:text-base tracking-widest shadow-[0_2px_0_0_#1e3a8a] uppercase">
+                {{ $language }}
+            </div>
         </div>
     </div>
 
@@ -377,8 +399,7 @@
         }
     @endphp
 
-    <div id="arenaView" class="h-[25vh] md:h-[30vh] lg:h-[40vh] min-h-[140px] shrink-0 bg-gradient-to-b {{ $bg_gradient }} relative overflow-hidden flex items-end border-b-[6px] md:border-b-[10px] transition-all duration-500">
-
+<div id="arenaView" class="h-[40vh] min-h-[140px] shrink-0 bg-gradient-to-b {{ $bg_gradient }} relative overflow-hidden flex items-end border-b-[6px] md:border-b-[8px] transition-all duration-500">
         @if ($theme == 'forest')
             <div class="absolute inset-0 bg-clouds opacity-40 mix-blend-overlay z-0"></div>
             <div class="firefly top-[40%] left-[20%]" style="animation-duration: 5s;"></div>
@@ -408,7 +429,7 @@
             <div class="absolute bottom-4 -left-10 w-[50vw] h-24 bg-white rounded-t-full shadow-[inset_0_-10px_20px_#BAE6FD] z-0"></div>
         @endif
 
-        <div id="heroWrapper" class="absolute left-[5%] md:left-[15%] bottom-3 flex flex-col items-center z-20">
+       <div id="heroWrapper" class="absolute left-[5%] md:left-[15%] bottom-5 flex flex-col items-center z-20 origin-bottom transform md:scale-[0.80] lg:scale-100 transition-transform">
             <div id="jumpHero" onclick="this.classList.add('animate-shake'); setTimeout(() => this.classList.remove('animate-shake'), 300);" class="w-16 h-24 md:w-32 md:h-44 flex flex-col items-center justify-end anim-robot-body relative drop-shadow-2xl cursor-crosshair">
                 <div class="flex flex-col items-center anim-antenna">
                     <div class="w-3.5 h-3.5 md:w-6 md:h-6 bg-yellow-400 rounded-full border-2 border-yellow-600 shadow-[0_0_10px_yellow] relative z-10 -mb-1"></div>
@@ -430,9 +451,9 @@
             <div id="heroShadow" class="w-12 h-2 md:w-20 md:h-3 bg-black rounded-full mt-1.5 blur-[2px] anim-shadow-robot opacity-50"></div>
         </div>
 
-        <div class="absolute bottom-10 md:bottom-20 left-1/2 transform -translate-x-1/2 text-4xl md:text-6xl text-white font-black italic drop-shadow-[0_5px_5px_rgba(0,0,0,0.5)] animate-bounce z-10" style="-webkit-text-stroke: 1px #000;">VS</div>
+        <div class="absolute bottom-8 md:bottom-12 left-1/2 transform -translate-x-1/2 text-4xl md:text-5xl lg:text-6xl text-white font-black italic drop-shadow-[0_5px_5px_rgba(0,0,0,0.5)] animate-bounce z-10" style="-webkit-text-stroke: 1px #000;">VS</div>
 
-        <div id="enemyWrapper" class="absolute right-[5%] md:right-[15%] bottom-3 flex flex-col items-center z-20">
+        <div id="enemyWrapper" class="absolute right-[5%] md:right-[15%] bottom-5 flex flex-col items-center z-20 origin-bottom transform md:scale-[0.75] lg:scale-100 transition-transform">
             <div id="bugEnemy" onclick="this.classList.add('animate-hit'); setTimeout(() => this.classList.remove('animate-hit'), 300);" class="cursor-crosshair anim-virus-body drop-shadow-2xl">
 
                 @if ($theme == 'forest')
@@ -449,7 +470,8 @@
                 @elseif ($theme == 'magic')
                     <div class="w-16 h-16 md:w-28 md:h-28 bg-[#1E1B4B] border-4 border-[#C026D3] shadow-[0_0_30px_#C026D3] rounded-full flex flex-col items-center justify-center relative animate-pulse">
                         <div class="w-6 h-6 md:w-12 md:h-12 bg-red-600 rounded-full flex justify-center items-center shadow-inner border-2 border-black">
-                            <div class="w-2 h-4 md:w-3 md:h-8 bg-black rounded-full"></div> </div>
+                            <div class="w-2 h-4 md:w-3 md:h-8 bg-black rounded-full"></div>
+                        </div>
                     </div>
 
                 @elseif ($theme == 'volcano')
@@ -479,80 +501,75 @@
             if ($theme == 'forest') $ground = 'bg-[#166534] border-[#4ADE80]';
             elseif ($theme == 'magic') $ground = 'bg-[#1E1B4B] border-[#C026D3]';
             elseif ($theme == 'volcano') $ground = 'bg-[#450A0A] border-[#DC2626]';
-            else $ground = 'bg-[#E0F2FE] border-[#bae6fd]'; // salju
+            else $ground = 'bg-[#E0F2FE] border-[#bae6fd]';
         @endphp
-        <div class="absolute bottom-0 left-0 w-full h-4 md:h-6 {{ $ground }} border-t-4 z-20 shadow-[inset_0_-2px_5px_rgba(0,0,0,0.3)]"></div>
+        <div class="absolute bottom-0 left-0 w-full h-4 md:h-5 {{ $ground }} border-t-4 z-20 shadow-[inset_0_-2px_5px_rgba(0,0,0,0.3)]"></div>
     </div>
 
-    <div class="flex-1 bg-[#FFFBEB] border-t-4 border-[#FDE047] p-3 sm:p-5 lg:p-8 flex flex-col lg:flex-row gap-4 lg:gap-6 overflow-hidden relative shadow-[inset_0_10px_20px_rgba(0,0,0,0.05)] min-h-0">
-        <div class="h-[35%] lg:h-auto lg:w-[45%] bg-white border-2 sm:border-4 border-blue-400 rounded-2xl lg:rounded-3xl p-4 sm:p-6 lg:p-8 relative flex flex-col min-h-[90px]">
-            <span class="absolute -top-4 sm:-top-5 left-4 sm:left-6 bg-blue-500 text-white px-3 py-1 sm:px-5 sm:py-1.5 text-sm sm:text-lg md:text-2xl font-bold rounded-full border-2 border-white transform -rotate-2 z-10">? MISSION</span>
-            <div class="mt-2 sm:mt-4 flex-1 overflow-y-auto pr-2 custom-scrollbar block">
+    <div class="flex-1 bg-[#FFFBEB] border-t-4 border-[#FDE047] p-3 sm:p-5 lg:p-8 flex flex-col md:flex-row gap-4 lg:gap-6 relative shadow-[inset_0_10px_20px_rgba(0,0,0,0.05)] min-h-0 overflow-hidden">
 
+        <div class="md:w-[60%] lg:w-[65%] w-full bg-white border-2 sm:border-4 border-blue-400 rounded-2xl lg:rounded-3xl p-4 sm:p-5 lg:p-6 relative flex flex-col h-full transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_15px_30px_rgba(96,165,250,0.3)]">
+            <span class="absolute -top-4 sm:-top-5 left-4 sm:left-6 bg-blue-500 text-white px-3 py-1 sm:px-5 sm:py-1.5 text-xs sm:text-sm md:text-base lg:text-lg font-bold rounded-full border-2 border-white transform -rotate-2 z-10">? MISSION</span>
+
+            <div class="mt-2 sm:mt-3 flex flex-col h-full min-h-0">
                 @php
                     $raw_text = $question->question_text;
-
                     $parts = preg_split('/(```[\s\S]*?```)/', $raw_text, -1, PREG_SPLIT_DELIM_CAPTURE);
-
                     $teks_instruksi = trim($parts[0] ?? '');
                     $blok_kode_markdown = trim($parts[1] ?? '');
 
                     $teks_instruksi = str_replace(['\n', '\\n'], " ", $teks_instruksi);
-
                     $blok_kode_markdown = str_ireplace(['\n', '\\n'], "\n", $blok_kode_markdown);
                     $blok_kode_markdown = str_ireplace('```c++', '```cpp', $blok_kode_markdown);
                     $blok_kode_markdown = str_ireplace('```python3', '```python', $blok_kode_markdown);
-
                     $html_kode = Str::markdown($blok_kode_markdown);
 
+                    // Ukuran font teks instruksi dikecilkan secara signifikan
                     $char_count = strlen($teks_instruksi);
-                    if ($char_count > 200) $font_size = "text-lg md:text-xl";
-                    elseif ($char_count > 100) $font_size = "text-xl md:text-2xl";
-                    else $font_size = "text-2xl md:text-4xl";
+                    if ($char_count > 200) $font_size = "text-sm md:text-base";
+                    elseif ($char_count > 100) $font_size = "text-base md:text-lg";
+                    else $font_size = "text-lg md:text-xl";
                 @endphp
 
-                <div class="mt-2 sm:mt-4 flex flex-col h-full overflow-hidden">
-                    <div class="shrink-0 mb-3 border-b-2 border-dashed border-blue-100 pb-2">
-                        <h3 class="{{ $font_size }} text-gray-800 font-bold leading-tight">
-                            {{ $teks_instruksi }}
-                        </h3>
-                    </div>
-
-                    <div class="flex-1 overflow-y-auto pr-2 custom-scrollbar">
-                        <div class="question-content w-full">
-                            {!! $html_kode !!}
-                        </div>
-                    </div>
+                <div class="shrink-0 mb-3 border-b-2 border-dashed border-blue-100 pb-3">
+                    <h3 class="{{ $font_size }} text-gray-800 font-bold leading-snug">
+                        {{ $teks_instruksi }}
+                    </h3>
                 </div>
 
+                <div class="question-content flex-1 w-full overflow-y-auto overflow-x-auto custom-scrollbar rounded-lg text-sm sm:text-base">
+                    {!! $html_kode !!}
+                </div>
             </div>
         </div>
 
-        <div class="flex-1 lg:w-[55%] bg-white border-2 sm:border-4 border-green-400 rounded-2xl lg:rounded-3xl p-3 sm:p-5 lg:p-6 relative shadow-[4px_4px_0_0_#86EFAC] flex flex-col min-h-0">
-            <span class="absolute -top-4 sm:-top-5 left-4 sm:left-6 bg-green-500 text-white px-3 py-1 sm:px-5 sm:py-1.5 text-sm sm:text-lg md:text-2xl font-bold rounded-full border-2 border-white shadow-sm transform rotate-2 z-10">! ACTION</span>
-            <div class="flex-1 flex flex-col justify-start mt-3 lg:mt-4 min-h-0">
+        <div class="md:w-[40%] lg:w-[35%] w-full bg-white border-2 sm:border-4 border-green-400 rounded-2xl lg:rounded-3xl p-4 sm:p-5 lg:p-6 relative shadow-[4px_4px_0_0_#86EFAC] flex flex-col h-full justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_15px_30px_rgba(74,222,128,0.3)]">
+            <span class="absolute -top-4 sm:-top-5 left-4 sm:left-6 bg-green-500 text-white px-3 py-1 sm:px-5 sm:py-1.5 text-xs sm:text-sm md:text-base lg:text-lg font-bold rounded-full border-2 border-white shadow-sm transform rotate-2 z-10">! ACTION</span>
+
+            <div class="flex-1 flex flex-col justify-center mt-3 sm:mt-4 mb-3 sm:mb-4 min-h-0">
                 @if($question->options && count($question->options) > 0)
-                <div class="overflow-y-auto custom-scrollbar h-full w-full pr-2">
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 lg:gap-5 w-full h-full content-start md:content-center">
+                <div class="w-full overflow-y-auto custom-scrollbar pr-1">
+                    <div class="flex flex-col gap-2 sm:gap-3 w-full">
                         @foreach($question->options as $index => $opsi)
-                        <label class="flex items-center p-3 sm:p-4 lg:p-6 border-2 sm:border-4 border-gray-200 bg-gray-50 hover:bg-blue-50 hover:border-blue-400 hover:shadow-md cursor-pointer group rounded-xl lg:rounded-2xl transition-all duration-200 transform active:scale-[0.98] has-[:checked]:bg-green-50 has-[:checked]:border-green-500 has-[:checked]:shadow-lg min-h-[60px] md:min-h-[80px]">
+                        <label class="flex items-center p-2 sm:p-3 border-2 sm:border-4 border-gray-200 bg-gray-50 hover:bg-blue-50 hover:border-blue-400 hover:shadow-md cursor-pointer group rounded-xl transition-all duration-200 transform active:scale-[0.98] has-[:checked]:bg-green-50 has-[:checked]:border-green-500 has-[:checked]:shadow-lg min-h-[50px] sm:min-h-[60px]">
                             <input type="radio" name="jawaban" value="{{ $index }}" class="hidden peer">
-                            <div class="w-5 h-5 sm:w-6 sm:h-6 md:w-8 md:h-8 border-2 sm:border-4 border-gray-400 peer-checked:bg-green-500 peer-checked:border-green-600 flex items-center justify-center mr-3 md:mr-4 flex-shrink-0 rounded-full transition-all relative"><div class="w-2 h-2 md:w-3 md:h-3 bg-white rounded-full opacity-0 peer-checked:opacity-100 transform scale-0 peer-checked:scale-100 transition-transform"></div></div>
-                            <span class="text-base sm:text-xl md:text-2xl lg:text-3xl text-gray-700 font-bold tracking-wide group-hover:text-blue-700 peer-checked:text-green-700 leading-tight break-words">{{ $opsi }}</span>
+                            <div class="w-4 h-4 sm:w-5 sm:h-5 md:w-6 md:h-6 border-2 border-gray-400 peer-checked:bg-green-500 peer-checked:border-green-600 flex items-center justify-center mr-2 md:mr-3 flex-shrink-0 rounded-full transition-all relative"><div class="w-1.5 h-1.5 md:w-2 md:h-2 bg-white rounded-full opacity-0 peer-checked:opacity-100 transform scale-0 peer-checked:scale-100 transition-transform"></div></div>
+                            <span class="text-sm sm:text-base md:text-lg text-gray-700 font-bold tracking-wide group-hover:text-blue-700 peer-checked:text-green-700 leading-tight break-words">{{ $opsi }}</span>
                         </label>
                         @endforeach
                     </div>
                 </div>
                 @else
-                <div class="flex flex-col items-center justify-center h-full p-2">
-                    <div class="flex items-center w-full bg-gray-900 border-2 sm:border-4 border-gray-700 focus-within:border-green-400 focus-within:shadow-[0_0_15px_rgba(74,222,128,0.4)] transition-all duration-300 p-4 sm:p-6 lg:p-8 rounded-xl lg:rounded-2xl shadow-inner relative overflow-hidden group">
-                        <span class="text-green-400 text-2xl sm:text-4xl lg:text-5xl mr-3 animate-pulse">>_</span>
-                        <input type="text" id="inputKode" class="bg-transparent border-none text-green-300 text-lg sm:text-2xl md:text-3xl lg:text-4xl w-full focus:outline-none font-mono placeholder-gray-600 relative z-10" placeholder="Ketik kode..." autocomplete="off" spellcheck="false" autofocus>
+                <div class="flex flex-col items-center justify-center w-full">
+                    <div class="flex items-center w-full bg-gray-900 border-2 sm:border-4 border-gray-700 focus-within:border-green-400 focus-within:shadow-[0_0_15px_rgba(74,222,128,0.4)] transition-all duration-300 p-3 sm:p-4 rounded-xl shadow-inner relative overflow-hidden group">
+                        <span class="text-green-400 text-xl sm:text-2xl mr-2 animate-pulse">>_</span>
+                        <input type="text" id="inputKode" class="bg-transparent border-none text-green-300 text-base sm:text-lg md:text-xl w-full focus:outline-none font-mono placeholder-gray-600 relative z-10" placeholder="Ketik kode..." autocomplete="off" spellcheck="false" autofocus>
                     </div>
                 </div>
                 @endif
             </div>
-            <button onclick="lockAnswer()" class="mt-3 sm:mt-5 shrink-0 w-full bg-green-500 hover:bg-green-400 border-2 sm:border-4 border-green-700 text-white text-xl sm:text-2xl md:text-3xl lg:text-4xl py-2 sm:py-3 rounded-full shadow-[0_4px_0_0_#15803D] sm:shadow-[0_6px_0_0_#15803D] active:translate-y-[4px] sm:active:translate-y-[6px] active:shadow-none transition-all tracking-widest font-bold cursor-pointer">EXECUTE!</button>
+
+            <button onclick="lockAnswer()" class="mt-auto shrink-0 w-full bg-green-500 hover:bg-green-400 border-2 sm:border-4 border-green-700 text-white text-lg sm:text-xl md:text-2xl py-2 sm:py-3 rounded-full shadow-[0_4px_0_0_#15803D] active:translate-y-[4px] active:shadow-none transition-all tracking-widest font-bold cursor-pointer">EXECUTE!</button>
         </div>
     </div>
 
