@@ -205,6 +205,24 @@ class QuestionSeeder extends Seeder
 
             [
             'language' => 'HTML',
+            'level' => 1,
+            'type' => 'pilihan_ganda',
+            'question_text' => "Bagaiamana cara menambahkan komentar dalam kode HTML?\n\nA. <!-- Ini komentar -->\nB. // Ini komentar\nC. /* Ini komentar */\nD. # Ini komentar",
+            'options' => json_encode(['A. <!-- Ini komentar -->', 'B. // Ini komentar', 'C. /* Ini komentar */', 'D. # Ini komentar']),
+            'correct_answer' => '0',
+            'penjelasan' => 'Komentar dalam HTML ditulis dengan format <!-- komentar -->. Ini memungkinkan kita untuk menambahkan catatan atau penjelasan dalam kode HTML tanpa mempengaruhi tampilan halaman.'
+            ],
+            [
+            'language' => 'HTML',
+            'level' => 2,
+            'type' => 'isian',
+            'question_text' => "Lengkapi kode untuk membuat table dengan dua kolom dan dua baris:\n\n```html\n<table border=\"1\">\n    <tr>\n        <td>Cell 1</td>\n        <td>Cell 2</td>\n    </tr>\n    <tr>\n        <td>Cell 3</td>\n        <td>___</td>\n    </tr>\n</table>\n```",
+            'options' => json_encode([]),
+            'correct_answer' => 'Cell 4',
+            'penjelasan' => 'Untuk melengkapi tabel dengan dua kolom dan dua baris, kita perlu menambahkan teks "Cell 4" di dalam tag <td> yang kosong pada baris kedua.'
+            ],
+            [
+            'language' => 'HTML',
             'level' => 3,
             'type' => 'isian',
             'question_text' => "Apa tag HTML yang digunakan untuk membuat judul?\n\nA. <h1>\nB. <title>\nC. <head>\nD. <header>",

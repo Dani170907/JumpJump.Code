@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Stage {{ $level }} - JUMPJUMP.CODE</title>
     <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -318,17 +318,26 @@
 <body class="bg-[#87CEEB] h-[100dvh] w-screen overflow-hidden flex flex-col relative font-[VT323] selection:bg-yellow-300 selection:text-black">
     <x-alert />
 
-    <div id="gameOverModal" class="fixed inset-0 z-[99999] hidden flex items-center justify-center bg-black/20 backdrop-blur-md transition-opacity p-4">
-        <div class="bg-gray-900 border-4 md:border-8 border-red-500 rounded-2xl md:rounded-3xl p-5 md:p-8 max-w-2xl w-full shadow-[10px_10px_0_0_rgba(220,38,38,0.4)] transform scale-90 transition-transform duration-300 flex flex-col items-center text-center max-h-[90vh] flex-shrink-0">
-            <h2 class="text-5xl sm:text-6xl md:text-7xl text-red-500 mb-1 md:mb-2 animate-bounce tracking-widest" style="text-shadow: 2px 2px 0 #000;">GAME OVER!</h2>
-            <div class="text-xl md:text-3xl text-yellow-300 mb-3 md:mb-4 animate-pulse">Oh no! Kamu kehabisan nyawa.</div>
-            <div class="bg-white border-2 md:border-4 border-gray-400 w-full p-4 md:p-6 rounded-xl md:rounded-2xl mb-4 md:mb-6 text-left shadow-inner flex-1 overflow-y-auto custom-scrollbar">
-                <span class="text-red-500 text-lg md:text-2xl font-bold block mb-1 md:mb-2 border-b-2 md:border-b-4 border-dashed border-red-200 pb-1">>> ANALISIS SISTEM:</span>
-                <p id="gameOverText" class="text-base sm:text-xl md:text-2xl text-gray-800 leading-snug md:leading-relaxed mt-2"></p>
-            </div>
-            <button onclick="returnToMap()" class="bg-[#ff6b4a] hover:bg-[#ff522c] text-white border-2 md:border-4 border-white px-6 md:px-10 py-2 md:py-3 rounded-full text-2xl md:text-3xl tracking-widest shadow-[0_4px_0_0_#b52a10] active:translate-y-[4px] active:shadow-none transition-all uppercase shrink-0">KEMBALI KE PETA</button>
+    <div id="statusModal" class="fixed inset-0 bg-black/70 z-[10000] flex items-center justify-center opacity-0 pointer-events-none transition-all duration-300 hidden backdrop-blur-sm">
+    <div class="bg-[#1a1c24] border-4 border-gray-700 rounded-3xl p-6 md:p-10 w-[90%] max-w-xl text-center transform scale-90 transition-all duration-300 shadow-[0_0_60px_rgba(0,0,0,0.8)]">
+
+        <h2 id="modalTitle" class="text-5xl md:text-7xl font-black tracking-tighter text-red-500 mb-4 animate-pulse" style="text-shadow: 0 0 15px rgba(239,68,68,0.5);">GAME OVER!</h2>
+
+        <p class="text-gray-400 text-lg md:text-2xl mb-6 font-medium">Oh no! Kamu kehabisan nyawa.</p>
+
+        <div class="bg-[#2a2e3a] border-2 border-gray-600 rounded-2xl p-5 md:p-8 text-left mb-8 relative overflow-hidden shadow-inner">
+            <div class="absolute top-0 left-0 w-full h-full bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPjxyZWN0IHdpZHRoPSI0IiBoZWlnaHQ9IjQiIGZpbGw9IiNmZmYiIGZpbGwtb3BhY2l0eT0iMC4wNSIvPjwvc3ZnPg==')] opacity-30"></div>
+            <p class="text-[#fecaca] text-xl md:text-3xl font-mono leading-relaxed relative z-10">
+                <span class="text-red-400 font-bold">&gt;&gt; ANALISIS SISTEM:</span><br>
+                <span id="modalStatusText" class="break-words">Syntax Error! Sistem penilai cerdas sedang sibuk. Pastikan jawabanmu sama persis dengan aturan penulisan.</span>
+            </p>
         </div>
+
+        <button id="modalBtn" onclick="returnToMap()" class="w-full bg-[#ef4444] hover:bg-[#dc2626] text-white text-2xl md:text-4xl font-bold py-3 md:py-5 rounded-2xl transition-all duration-150 transform hover:scale-105 active:scale-95 shadow-[0_6px_0_0_#991b1b] active:shadow-[0_2px_0_0_#991b1b] active:translate-y-1">
+            KEMBALI KE PETA
+        </button>
     </div>
+</div>
 
     <div class="h-12 md:h-16 lg:h-20 bg-white border-b-4 lg:border-b-8 border-gray-300 flex items-center justify-between px-3 md:px-6 z-20 shadow-md shrink-0">
         <a href="/map" class="text-gray-600 hover:text-red-500 text-base md:text-2xl lg:text-3xl tracking-widest font-bold transition-all hover:scale-105 cursor-pointer flex items-center gap-1 md:gap-2">
@@ -580,13 +589,13 @@
             if (isInputMode) {
                 const inputElem = document.getElementById('inputKode');
                 if (!inputElem || inputElem.value.trim() === "") {
-                    return window.showCustomAlert("Hei, terminalnya jangan dikosongin!", "warning");
+                    return window.showCustomAlert("Hei, terminalnya jangan dikosongin!", "warning", 3000);
                 }
                 jawabanPemain = inputElem.value.trim();
             } else {
                 const selectedOption = document.querySelector('input[name="jawaban"]:checked');
                 if (!selectedOption) {
-                    return window.showCustomAlert("Pilih aksinya dulu dong!", "warning");
+                    return window.showCustomAlert("Pilih aksinya dulu dong!", "warning", 3000);
                 }
                 jawabanPemain = selectedOption.value;
             }
@@ -599,63 +608,128 @@
             const heroWrapper = document.getElementById('heroWrapper');
             const enemyWrapper = document.getElementById('enemyWrapper');
 
-            if (jawabanPemain === kunciJawaban) {
-                hero.classList.remove('anim-robot-body');
-                heroShadow.classList.remove('anim-shadow-robot');
-                hero.classList.add('animate-victory');
-                heroWrapper.style.animation = "victoryJump 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards";
-                setTimeout(() => {
-                    enemy.classList.remove('anim-virus-body');
-                    enemy.style.animation = "enemyExplode 0.4s ease-out forwards";
-                    enemyShadow.style.opacity = "0";
-                }, 550);
-                setTimeout(() => {
-                    window.showCustomAlert("PERFECT! Serangan Berhasil!", "success");
+            // Persiapan elemen Modal
+            const modal = document.getElementById('statusModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalText = document.getElementById('modalStatusText');
+            const modalBtn = document.getElementById('modalBtn');
+            const modalDesc = modal.querySelector('p'); // Paragraf deskripsi kecil
+
+            // Tampilkan notifikasi loading analisis
+            window.showCustomAlert("AI sedang menganalisis kode...", "info", 2000);
+
+            // Kirim jawaban ke Backend
+            fetch('/submit-answer', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                },
+                body: JSON.stringify({
+                    question_id: "{{ $question->id }}",
+                    user_answer: jawabanPemain
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.is_correct) {
+                    // --- SKENARIO: JAWABAN BENAR ---
+                    hero.classList.remove('anim-robot-body');
+                    heroShadow.classList.remove('anim-shadow-robot');
+                    hero.classList.add('animate-victory');
+                    heroWrapper.style.animation = "victoryJump 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards";
+                    setTimeout(() => {
+                        enemy.classList.remove('anim-virus-body');
+                        enemy.style.animation = "enemyExplode 0.4s ease-out forwards";
+                        enemyShadow.style.opacity = "0";
+                    }, 550);
+
+                    // Update Level Terbuka di Storage
                     const currentLang = localStorage.getItem('jumpjump_language') || selectedLang;
                     const storageKey = `jumpjump_highest_level_${currentLang.toUpperCase()}`;
                     let highestLevel = parseInt(localStorage.getItem(storageKey)) || 1;
                     if (currentLevel >= highestLevel) {
                         localStorage.setItem(storageKey, currentLevel + 1);
                     }
-                    setTimeout(() => window.location.href = '/map', 1500);
-                }, 1000);
-            } else {
-                enemy.classList.remove('anim-virus-body');
-                enemyWrapper.style.transition = "all 0.2s ease-in";
-                enemyWrapper.style.transform = "translateX(-60vw) scale(1.3)";
-                setTimeout(() => {
-                    hero.classList.add('animate-hit');
-                    arenaView.classList.add('animate-shake');
-                    setTimeout(() => {
-                        hero.classList.remove('animate-hit');
-                        arenaView.classList.remove('animate-shake');
-                        enemyWrapper.style.transform = "translateX(0) scale(1)";
-                        setTimeout(() => { enemy.classList.add('anim-virus-body'); }, 300);
-                    }, 300);
-                }, 200);
 
-                currentHp--;
-                localStorage.setItem(hpKey, currentHp);
-                renderHp();
-
-                if (currentHp <= 0) {
-                    const teksPenjelasan = penjelasanSoal ? penjelasanSoal : "Syntax Error! Perhatikan lagi logikanya.";
-                    const modal = document.getElementById('gameOverModal');
-                    const modalText = document.getElementById('gameOverText');
-                    modalText.innerText = teksPenjelasan;
-                    modal.classList.remove('hidden');
+                    // TAMPILKAN MODAL TEMA MENANG (SETELAH ANIMASI)
                     setTimeout(() => {
-                        modal.children[0].classList.remove('scale-90');
-                        modal.children[0].classList.add('scale-100');
-                    }, 50);
-                    localStorage.removeItem(hpKey);
+                        // Konfigurasi Modal Jadi Tema Sukses
+                        modalTitle.innerText = "STAGE CLEAR!";
+                        modalTitle.className = "text-5xl md:text-7xl font-black tracking-tighter text-green-400 mb-4 animate-pulse";
+                        modalTitle.style.textShadow = "0 0 15px rgba(74,222,128,0.5)";
+
+                        modalDesc.innerText = "Luar biasa! Bug berhasil dimusnahkan.";
+                        modalText.innerText = data.feedback; // Penjelasan dari AI
+                        modalText.parentElement.classList.replace('text-[#fecaca]', 'text-[#bbf7d0]');
+                        modalText.parentElement.querySelector('span').classList.replace('text-red-400', 'text-green-400');
+
+                        modalBtn.innerText = "LANJUT KE PETA";
+                        modalBtn.className = "w-full bg-[#16a34a] hover:bg-[#15803d] text-white text-2xl md:text-4xl font-bold py-3 md:py-5 rounded-2xl transition-all duration-150 transform hover:scale-105 active:scale-95 shadow-[0_6px_0_0_#14532d] active:shadow-[0_2px_0_0_#14532d] active:translate-y-1";
+
+                        // Munculkan Modal
+                        modal.classList.remove('hidden');
+                        setTimeout(() => {
+                            modal.classList.remove('opacity-0', 'pointer-events-none');
+                            modal.children[0].classList.replace('scale-90', 'scale-100');
+                        }, 50);
+                    }, 1200);
+
                 } else {
-                    const hpDiv = document.getElementById('hpContainer');
-                    hpDiv.classList.add('scale-105', 'border-red-500');
-                    setTimeout(() => hpDiv.classList.remove('scale-105', 'border-red-500'), 300);
-                    window.showCustomAlert(`OUCH! Salah. Sisa Nyawa: ${currentHp}`, "error");
+                    // --- SKENARIO: JAWABAN SALAH ---
+                    // ... (Animasi kalah tetap sama) ...
+                    enemy.classList.remove('anim-virus-body');
+                    enemyWrapper.style.transition = "all 0.2s ease-in";
+                    enemyWrapper.style.transform = "translateX(-60vw) scale(1.3)";
+                    setTimeout(() => {
+                        hero.classList.add('animate-hit');
+                        arenaView.classList.add('animate-shake');
+                        setTimeout(() => {
+                            hero.classList.remove('animate-hit');
+                            arenaView.classList.remove('animate-shake');
+                            enemyWrapper.style.transform = "translateX(0) scale(1)";
+                            setTimeout(() => { enemy.classList.add('anim-virus-body'); }, 300);
+                        }, 300);
+                    }, 200);
+
+                    currentHp--;
+                    localStorage.setItem(hpKey, currentHp);
+                    renderHp();
+
+                    if (currentHp <= 0) {
+                        // TAMPILKAN MODAL TEMA KALAH TOTAL (GAME OVER)
+                        // Konfigurasi Modal Jadi Tema Merah (Bawaan awal)
+                        modalTitle.innerText = "GAME OVER!";
+                        modalTitle.className = "text-5xl md:text-7xl font-black tracking-tighter text-red-500 mb-4 animate-pulse";
+                        modalTitle.style.textShadow = "0 0 15px rgba(239,68,68,0.5)";
+
+                        modalDesc.innerText = "Oh no! Kamu kehabisan nyawa.";
+                        modalText.innerText = "Syntax Error! " + data.feedback; // Umpan balik AI/DB
+
+                        modalBtn.innerText = "KEMBALI KE PETA";
+                        modalBtn.className = "w-full bg-[#ef4444] hover:bg-[#dc2626] text-white text-2xl md:text-4xl font-bold py-3 md:py-5 rounded-2xl transition-all duration-150 transform hover:scale-105 active:scale-95 shadow-[0_6px_0_0_#991b1b] active:shadow-[0_2px_0_0_#991b1b] active:translate-y-1";
+
+                        // Munculkan Modal
+                        modal.classList.remove('hidden');
+                        setTimeout(() => {
+                            modal.classList.remove('opacity-0', 'pointer-events-none');
+                            modal.children[0].classList.replace('scale-90', 'scale-100');
+                        }, 50);
+                        localStorage.removeItem(hpKey);
+                    } else {
+                        const hpDiv = document.getElementById('hpContainer');
+                        hpDiv.classList.add('scale-105', 'border-red-500');
+                        setTimeout(() => hpDiv.classList.remove('scale-105', 'border-red-500'), 300);
+
+                        // Alert merah biasa (untuk nyawa belum habis)
+                        window.showCustomAlert(`OUCH! ${data.feedback} Sisa Nyawa: ${currentHp}`, "error", 6000);
+                    }
                 }
-            }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                window.showCustomAlert('Koneksi terputus! Gagal menghubungi server.', 'error', 3000);
+            });
         }
         function returnToMap() {
             window.location.href = '/map';

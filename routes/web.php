@@ -15,3 +15,6 @@ Route::get('/quiz/{language}/{level}', [GameController::class, 'showQuiz']);
 
 // Route untuk AJAX mengecek ketersediaan soal
 Route::get('/check-stage/{language}/{level}', [GameController::class, 'checkStage']);
+
+// Rute untuk AI Evaluator
+Route::post('/submit-answer', [GameController::class, 'submitAnswer'])->name('submit.answer');
