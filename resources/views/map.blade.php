@@ -177,69 +177,78 @@
          $btnClass = "relative w-full h-full flex items-center justify-center rounded-full bg-gray-500 hover:bg-gray-400 border-[3px] md:border-4 border-gray-300 text-gray-200 text-lg md:text-3xl lg:text-5xl font-bold shadow-[0_4px_0_0_#374151] active:translate-y-[4px] active:shadow-none transition-all text-outline cursor-pointer block z-10";
       @endphp
 
-      <div id="node-1" class="{{ $wrapperClass }}" style="top: 98.2%; left: 42.5%;">
+      <div id="node-1" class="{{ $wrapperClass }}" style="top: 98%; left: 29%;">
          <button id="btn-level-1" onclick="pilihLevel(1)" class="{{ $btnClass }}">1</button>
       </div>
-      <div id="node-2" class="{{ $wrapperClass }}" style="top: 83.7%; left: 28.7%;">
+      <div id="node-2" class="{{ $wrapperClass }}" style="top: 92.9%; left: 30%;">
          <button id="btn-level-2" onclick="pilihLevel(2)" class="{{ $btnClass }}">2</button>
       </div>
-      <div id="node-3" class="{{ $wrapperClass }}" style="top: 77.5%; left: 37%;">
+      <div id="node-3" class="{{ $wrapperClass }}" style="top: 91.5%; left: 44%;">
          <button id="btn-level-3" onclick="pilihLevel(3)" class="{{ $btnClass }}">3</button>
       </div>
-      <div id="node-4" class="{{ $wrapperClass }}" style="top: 75.5%; left: 71.7%;">
+      <div id="node-4" class="{{ $wrapperClass }}" style="top: 91%; left: 61%;">
          <button id="btn-level-4" onclick="pilihLevel(4)" class="{{ $btnClass }}">4</button>
       </div>
-      <div id="node-5" class="{{ $wrapperClass }}" style="top: 71%; left: 84.5%;">
+      <div id="node-5" class="{{ $wrapperClass }}" style="top: 91%; left: 80%;">
          <button id="btn-level-5" onclick="pilihLevel(5)" class="{{ $btnClass }}">5</button>
       </div>
-      <div id="node-6" class="{{ $wrapperClass }}" style="top: 62%; left: 77.3%;">
+      <div id="node-6" class="{{ $wrapperClass }}" style="top: 83%; left: 87%;">
          <button id="btn-level-6" onclick="pilihLevel(6)" class="{{ $btnClass }}">6</button>
       </div>
-      <div id="node-7" class="{{ $wrapperClass }}" style="top: 58%; left: 52%;">
+      <div id="node-7" class="{{ $wrapperClass }}" style="top: 78.5%; left: 58%;">
          <button id="btn-level-7" onclick="pilihLevel(7)" class="{{ $btnClass }}">7</button>
       </div>
-      <div id="node-8" class="{{ $wrapperClass }}" style="top: 56.5%; left: 25.5%;">
+      <div id="node-8" class="{{ $wrapperClass }}" style="top: 76%; left: 30%;">
          <button id="btn-level-8" onclick="pilihLevel(8)" class="{{ $btnClass }}">8</button>
       </div>
-      <div id="node-9" class="{{ $wrapperClass }}" style="top: 48.5%; left: 22.8%;">
+      <div id="node-9" class="{{ $wrapperClass }}" style="top: 68%; left: 20%;">
          <button id="btn-level-9" onclick="pilihLevel(9)" class="{{ $btnClass }}">9</button>
       </div>
-      <div id="node-10" class="{{ $wrapperClass }}" style="top: 45%; left: 35%;">
+      <div id="node-10" class="{{ $wrapperClass }}" style="top: 64%; left: 35%;">
          <button id="btn-level-10" onclick="pilihLevel(10)" class="{{ $btnClass }}">10</button>
       </div>
-      <div id="node-11" class="{{ $wrapperClass }}" style="top: 47%; left: 50%;">
+      <div id="node-11" class="{{ $wrapperClass }}" style="top: 66.5%; left: 54%;">
          <button id="btn-level-11" onclick="pilihLevel(11)" class="{{ $btnClass }}">11</button>
       </div>
-      <div id="node-12" class="{{ $wrapperClass }}" style="top: 46%; left: 64%;">
+      <div id="node-12" class="{{ $wrapperClass }}" style="top: 64%; left: 70%;">
          <button id="btn-level-12" onclick="pilihLevel(12)" class="{{ $btnClass }}">12</button>
       </div>
-      <div id="node-13" class="{{ $wrapperClass }}" style="top: 40%; left: 76%;">
+      <div id="node-13" class="{{ $wrapperClass }}" style="top: 59%; left: 83%;">
          <button id="btn-level-13" onclick="pilihLevel(13)" class="{{ $btnClass }}">13</button>
       </div>
-      <div id="node-14" class="{{ $wrapperClass }}" style="top: 37.5%; left: 64%;">
+      <div id="node-14" class="{{ $wrapperClass }}" style="top: 52%; left: 70%;">
          <button id="btn-level-14" onclick="pilihLevel(14)" class="{{ $btnClass }}">14</button>
       </div>
-      <div id="node-15" class="{{ $wrapperClass }}" style="top: 34.5%; left: 50%;">
+      <div id="node-15" class="{{ $wrapperClass }}" style="top: 46%; left: 70%;">
          <button id="btn-level-15" onclick="pilihLevel(15)" class="{{ $btnClass }}">15</button>
       </div>
-      <div id="node-16" class="{{ $wrapperClass }}" style="top: 31%; left: 37%;">
+      <div id="node-16" class="{{ $wrapperClass }}" style="top: 43%; left: 56%;">
          <button id="btn-level-16" onclick="pilihLevel(16)" class="{{ $btnClass }}">16</button>
       </div>
-      <div id="node-17" class="{{ $wrapperClass }}" style="top: 25.3%; left: 34.5%;">
+      <div id="node-17" class="{{ $wrapperClass }}" style="top: 41%; left: 43%;">
          <button id="btn-level-17" onclick="pilihLevel(17)" class="{{ $btnClass }}">17</button>
       </div>
-      <div id="node-18" class="{{ $wrapperClass }}" style="top: 24.5%; left: 51%;">
+      <div id="node-18" class="{{ $wrapperClass }}" style="top: 36%; left: 32%;">
          <button id="btn-level-18" onclick="pilihLevel(18)" class="{{ $btnClass }}">18</button>
       </div>
-      <div id="node-19" class="{{ $wrapperClass }}" style="top: 21%; left: 62%;">
+      <div id="node-19" class="{{ $wrapperClass }}" style="top: 35.5%; left: 46%;">
          <button id="btn-level-19" onclick="pilihLevel(19)" class="{{ $btnClass }}">19</button>
       </div>
-      <div id="node-20" class="{{ $wrapperClass }}" style="top: 17.5%; left: 50%;">
+      <div id="node-20" class="{{ $wrapperClass }}" style="top: 33%; left: 58%;">
          <button id="btn-level-20" onclick="pilihLevel(20)" class="{{ $btnClass }}">20</button>
       </div>
-      <div id="node-21" class="{{ $wrapperClass }}" style="top: 10%; left: 50%;">
-         <button id="btn-level-21" onclick="pilihLevel(20)" class="{{ $btnClass }}">20</button>
+      <div id="node-21" class="{{ $wrapperClass }}" style="top: 26%; left: 43%;">
+         <button id="btn-level-21" onclick="pilihLevel(21)" class="{{ $btnClass }}">21</button>
       </div>
+      <div id="node-22" class="{{ $wrapperClass }}" style="top: 26%; left: 43%;">
+         <button id="btn-level-22" onclick="pilihLevel(22)" class="{{ $btnClass }}">22</button>
+      </div>
+      <div id="node-23" class="{{ $wrapperClass }}" style="top: 26%; left: 43%;">
+         <button id="btn-level-23" onclick="pilihLevel(23)" class="{{ $btnClass }}">23</button>
+      </div>
+    <div id="node-24" class="{{ $wrapperClass }}" style="top: 26%; left: 43%;">
+        <button id="btn-level-24" onclick="pilihLevel(24)" class="{{ $btnClass }}">24</button>     
+        
    </div>
 
    <script>
