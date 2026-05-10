@@ -8,7 +8,7 @@
    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
    @vite(['resources/css/app.css', 'resources/js/app.js'])
    <style>
-      body {
+    body {
          font-family: 'VT323', monospace;
          scrollbar-width: thin;
          scrollbar-color: #ef4444 #1f2937;
@@ -22,9 +22,7 @@
          text-shadow: 2px 0 #000, -2px 0 #000, 0 2px #000, 0 -2px #000, 1px 1px #000, -1px -1px #000, 1px -1px #000, -1px 1px #000;
       }
 
-      /* ========================================= */
       /* 1. EFEK KERAMAIAN LINGKUNGAN RETRO       */
-      /* ========================================= */
 
       .scanlines {
          position: fixed; inset: 0; z-index: 60; pointer-events: none;
@@ -77,9 +75,7 @@
          animation: nodeGlow 3s ease-in-out infinite;
       }
 
-      /* ========================================= */
       /* 2. ANIMASI KARAKTER (Robot)               */
-      /* ========================================= */
       @keyframes hoverRobot {
          0%, 100% { transform: translateY(0px) rotate(0deg); }
          50% { transform: translateY(-8px) rotate(2deg); }
@@ -181,7 +177,7 @@
          $btnClass = "relative w-full h-full flex items-center justify-center rounded-full bg-gray-500 hover:bg-gray-400 border-[3px] md:border-4 border-gray-300 text-gray-200 text-lg md:text-3xl lg:text-5xl font-bold shadow-[0_4px_0_0_#374151] active:translate-y-[4px] active:shadow-none transition-all text-outline cursor-pointer block z-10";
       @endphp
 
-      <div id="node-1" class="{{ $wrapperClass }}" style="top: 90.5%; left: 42.5%;">
+      <div id="node-1" class="{{ $wrapperClass }}" style="top: 98.2%; left: 42.5%;">
          <button id="btn-level-1" onclick="pilihLevel(1)" class="{{ $btnClass }}">1</button>
       </div>
       <div id="node-2" class="{{ $wrapperClass }}" style="top: 83.7%; left: 28.7%;">
@@ -241,19 +237,20 @@
       <div id="node-20" class="{{ $wrapperClass }}" style="top: 17.5%; left: 50%;">
          <button id="btn-level-20" onclick="pilihLevel(20)" class="{{ $btnClass }}">20</button>
       </div>
+      <div id="node-21" class="{{ $wrapperClass }}" style="top: 10%; left: 50%;">
+         <button id="btn-level-21" onclick="pilihLevel(20)" class="{{ $btnClass }}">20</button>
+      </div>
    </div>
 
    <script>
       let currentPositionLevel = 1;
 
-      // ===================================================
       // PERBAIKAN JAVASCRIPT: Ganti Garis Lurus (line) dengan Jalur Lengkung (path)
-      // ===================================================
       function drawMapPaths(highestLevel) {
           const svg = document.getElementById('pathLayer');
           svg.innerHTML = '';
 
-          for(let i = 1; i < 20; i++) {
+          for(let i = 1; i < 25; i++) {
               const startNode = document.getElementById(`node-${i}`);
               const endNode = document.getElementById(`node-${i+1}`);
 
@@ -263,14 +260,10 @@
                   const x2 = parseFloat(endNode.style.left);
                   const y2 = parseFloat(endNode.style.top);
 
-                  // Ganti 'line' dengan 'path' untuk lekukan
                   const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
 
-                  // Hitung koordinat lengkungan Cubic Bezier (Curved S-shape)
-                  //offsetX digunakan untuk membuat lengkungan melingkar di antara dua titik
                   const offsetX = 10;
 
-                  // Perhitungan jalur: M (Move to) P1, C (Cubic Bezier) P1+off, P2-off, P2
                   const d = `M ${x1} ${y1} C ${x1 + offsetX} ${y1}, ${x2 - offsetX} ${y2}, ${x2} ${y2}`;
 
                   path.setAttribute('d', d);
