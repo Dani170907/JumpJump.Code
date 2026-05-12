@@ -202,6 +202,52 @@ class QuestionSeeder extends Seeder
             'correct_answer' => 'return false;',
             'penjelasan' => 'Fungsi isPrime memeriksa apakah n adalah bilangan prima dengan memeriksa apakah n habis dibagi oleh angka dari 2 hingga n/2. Jika n habis dibagi oleh salah satu angka tersebut, maka n bukan bilangan prima, sehingga kita mengembalikan false. Jika n tidak habis dibagi oleh angka manapun, maka n adalah bilangan prima, sehingga kita mengembalikan true.'
             ],
+            [
+            'language' => 'C++',
+            'level' => 21,
+            'type' => 'pilihan_ganda',
+            'question_text' => "Apa output dari kode berikut?\n\n```cpp\n#include <iostream>\nusing namespace std;\n\nclass Base {\npublic:\n    void display() {\n        cout << \"Base class\";\n    }\n};\n\nclass Derived : public Base {\npublic:\n    void display() {\n        cout << \"Derived class\";\n    }\n};\n\nint main() {\n    Base* basePtr = new Derived();\n    basePtr->display();\n    delete basePtr;\n    return 0;\n}\n```",
+            'options' => json_encode(['A. Base class', 'B. Derived class', 'C. Error', 'D. No output']),
+            'correct_answer' => '0',
+            'penjelasan' => 'Karena fungsi display() dideklarasikan sebagai virtual di kelas Base dan di override di kelas Derived, maka ketika kita memanggil display() melalui pointer ke Base yang sebenarnya menunjuk ke objek Derived, fungsi yang dipanggil adalah versi Derived, sehingga outputnya adalah "Derived class".'
+            ],
+            [
+            'language' => 'C++',
+            'level' => 22,
+            'type' => 'isian',
+            'question_text' => "Lengkapi kode berikut agar fungsi reverseString mengembalikan string yang dibalik:\n\n```cpp\n#include <iostream>\n#include <string>\nusing namespace std;\n\nstring reverseString(string str) {\n    string reversed = \"\";\n    for (int i = str.length() - 1; i >= 0; i--) {\n        reversed += str[i];\n    }\n    return ___;\n}\n\nint main() {\n    string input = \"Hello\";\n    string output = reverseString(input);\n    cout << output;\n    return 0;\n}\```",
+            'options' => json_encode([]),
+            'correct_answer' => 'reversed',
+            'penjelasan' => 'Fungsi reverseString membalik string dengan menambahkan karakter dari string asli ke string reversed dalam urutan terbalik. Setelah perulangan selesai, kita mengembalikan string reversed yang berisi hasil pembalikan.'
+            ],
+            [
+            'language' => 'C++',
+            'level' => 23,
+            'type' => 'pilihan_ganda',
+            'question_text' => "Apa output dari kode berikut?\n\n```cpp\n#include <iostream>\nusing namespace std;\n\nclass A {\npublic:\n    void show() {\n        cout << \"Class A\";\n    }\n};\n\nclass B : public A {\npublic:\n    void show() {\n        cout << \"Class B\";\n    }\n};\n\nint main() {\n    A* aPtr = new B();\n    aPtr->show();\n    delete aPtr;\n    return 0;\n}\n```",
+            'options' => json_encode(['A    . Class A', 'B. Class B', 'C. Error', 'D. No output']),
+            'correct_answer' => '0',
+            'penjelasan' => 'Karena fungsi show() tidak dideklarasikan sebagai virtual di kelas A, maka ketika kita memanggil show() melalui pointer ke A yang sebenarnya menunjuk ke objek B, fungsi yang dipanggil adalah versi A, sehingga outputnya adalah "Class A".'
+            ],
+            [
+            'language' => 'C++',
+            'level' => 24,
+            'type' => 'isian',
+            'question_text' => "Perhatikan kode berikut. Lengkapi bagian yang kosong (___) agar fungsi countDigits mengembalikan jumlah digit dalam sebuah bilangan:\n\n```cpp\n#include <iostream>\nusing namespace std;\n\nint countDigits(int n) {\n    int count = 0;\n    while (n != 0) {\n        n /= 10;\n        count++;\n    }\n    return ___;\n}\n\nint main() {\n    int number = 12345;\n    int digitCount = countDigits(number);\n    cout << \"Number of digits: \" << digitCount;\n    return 0;\n}\n```",
+            'options' => json_encode([]),
+            'correct_answer' => 'count',
+            'penjelasan' => 'Fungsi countDigits menghitung jumlah digit dalam sebuah bilangan dengan membagi n dengan 10 secara berulang hingga n menjadi 0. Setiap kali n dibagi dengan 10, kita meningkatkan count untuk menghitung jumlah digit. Setelah perulangan selesai, kita mengembalikan count yang berisi jumlah digit dalam bilangan tersebut.'
+            ],
+            [
+            'language' => 'C++',
+            'level' => 25,
+            'type' => 'pilihan_ganda',
+            'question_text' => "Apa output dari kode berikut?\n\n```cpp\n#include <iostream>\nusing namespace std;\n\nclass Base {\npublic:\n    virtual void display() {\n        cout << \"Base class\";\n    }\n};\n\nclass Derived : public Base {\npublic:\n    void display() override {\n        cout << \"Derived class\";\n    }\n};\n\nint main() {\n    Base* basePtr = new Derived();\n    basePtr->display();\n    delete basePtr;\n    return 0;\n}\n```",
+            'options' => json_encode(['A. Base class', 'B. Derived class', 'C. Error', 'D. No output']),
+            'correct_answer' => '1',
+            'penjelasan' => 'Karena fungsi display() dideklarasikan sebagai virtual di kelas Base dan di override di kelas Derived, maka ketika kita memanggil display() melalui pointer ke Base yang sebenarnya menunjuk ke objek Derived, fungsi yang dipanggil adalah versi Derived, sehingga outputnya adalah "Derived class".'
+            ],
+
 
             [
             'language' => 'HTML',

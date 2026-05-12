@@ -9,21 +9,20 @@
    @vite(['resources/css/app.css', 'resources/js/app.js'])
    <style>
     body {
-         font-family: 'VT323', monospace;
-         scrollbar-width: thin;
-         scrollbar-color: #ef4444 #1f2937;
-         overflow-x: hidden;
-      }
-      body::-webkit-scrollbar { width: 12px; }
-      body::-webkit-scrollbar-track { background: #1f2937; }
-      body::-webkit-scrollbar-thumb { background-color: #ef4444; border-radius: 6px; }
+        font-family: 'VT323', monospace;
+        scrollbar-width: thin;
+        scrollbar-color: #ef4444 #1f2937;
+        overflow-x: hidden;
+    }
+    body::-webkit-scrollbar { width: 12px; }
+    body::-webkit-scrollbar-track { background: #1f2937; }
+    body::-webkit-scrollbar-thumb { background-color: #ef4444; border-radius: 6px; }
 
       .text-outline {
          text-shadow: 2px 0 #000, -2px 0 #000, 0 2px #000, 0 -2px #000, 1px 1px #000, -1px -1px #000, 1px -1px #000, -1px 1px #000;
       }
 
       /* 1. EFEK KERAMAIAN LINGKUNGAN RETRO       */
-
       .scanlines {
          position: fixed; inset: 0; z-index: 60; pointer-events: none;
          background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
@@ -172,228 +171,232 @@
          <div class="w-24 h-4 bg-black rounded-full mt-2 blur-[2px] opacity-60"></div>
       </div>
 
-      @php
-         $wrapperClass = "absolute z-10 w-[7%] md:w-[7.5%] lg:w-[7.5%] aspect-square transform -translate-x-1/2 -translate-y-1/2";
-         $btnClass = "relative w-full h-full flex items-center justify-center rounded-full bg-gray-500 hover:bg-gray-400 border-[3px] md:border-4 border-gray-300 text-gray-200 text-lg md:text-3xl lg:text-5xl font-bold shadow-[0_4px_0_0_#374151] active:translate-y-[4px] active:shadow-none transition-all text-outline cursor-pointer block z-10";
-      @endphp
+        @php
+            $wrapperClass = "absolute z-10 w-[7%] md:w-[7.5%] lg:w-[7.5%] aspect-square transform -translate-x-1/2 -translate-y-1/2";
+            $btnClass = "relative w-full h-full flex items-center justify-center rounded-full bg-gray-500 hover:bg-gray-400 border-[3px] md:border-4 border-gray-300 text-gray-200 text-lg md:text-3xl lg:text-5xl font-bold shadow-[0_4px_0_0_#374151] active:translate-y-[4px] active:shadow-none transition-all text-outline cursor-pointer block z-10";
+        @endphp
 
-      <div id="node-1" class="{{ $wrapperClass }}" style="top: 98%; left: 29%;">
-         <button id="btn-level-1" onclick="pilihLevel(1)" class="{{ $btnClass }}">1</button>
-      </div>
-      <div id="node-2" class="{{ $wrapperClass }}" style="top: 92.9%; left: 30%;">
-         <button id="btn-level-2" onclick="pilihLevel(2)" class="{{ $btnClass }}">2</button>
-      </div>
-      <div id="node-3" class="{{ $wrapperClass }}" style="top: 91.5%; left: 44%;">
-         <button id="btn-level-3" onclick="pilihLevel(3)" class="{{ $btnClass }}">3</button>
-      </div>
-      <div id="node-4" class="{{ $wrapperClass }}" style="top: 91%; left: 61%;">
-         <button id="btn-level-4" onclick="pilihLevel(4)" class="{{ $btnClass }}">4</button>
-      </div>
-      <div id="node-5" class="{{ $wrapperClass }}" style="top: 91%; left: 80%;">
-         <button id="btn-level-5" onclick="pilihLevel(5)" class="{{ $btnClass }}">5</button>
-      </div>
-      <div id="node-6" class="{{ $wrapperClass }}" style="top: 83%; left: 87%;">
-         <button id="btn-level-6" onclick="pilihLevel(6)" class="{{ $btnClass }}">6</button>
-      </div>
-      <div id="node-7" class="{{ $wrapperClass }}" style="top: 78.5%; left: 58%;">
-         <button id="btn-level-7" onclick="pilihLevel(7)" class="{{ $btnClass }}">7</button>
-      </div>
-      <div id="node-8" class="{{ $wrapperClass }}" style="top: 76%; left: 30%;">
-         <button id="btn-level-8" onclick="pilihLevel(8)" class="{{ $btnClass }}">8</button>
-      </div>
-      <div id="node-9" class="{{ $wrapperClass }}" style="top: 68%; left: 20%;">
-         <button id="btn-level-9" onclick="pilihLevel(9)" class="{{ $btnClass }}">9</button>
-      </div>
-      <div id="node-10" class="{{ $wrapperClass }}" style="top: 64%; left: 35%;">
-         <button id="btn-level-10" onclick="pilihLevel(10)" class="{{ $btnClass }}">10</button>
-      </div>
-      <div id="node-11" class="{{ $wrapperClass }}" style="top: 66.5%; left: 54%;">
-         <button id="btn-level-11" onclick="pilihLevel(11)" class="{{ $btnClass }}">11</button>
-      </div>
-      <div id="node-12" class="{{ $wrapperClass }}" style="top: 64%; left: 70%;">
-         <button id="btn-level-12" onclick="pilihLevel(12)" class="{{ $btnClass }}">12</button>
-      </div>
-      <div id="node-13" class="{{ $wrapperClass }}" style="top: 59%; left: 83%;">
-         <button id="btn-level-13" onclick="pilihLevel(13)" class="{{ $btnClass }}">13</button>
-      </div>
-      <div id="node-14" class="{{ $wrapperClass }}" style="top: 52%; left: 70%;">
-         <button id="btn-level-14" onclick="pilihLevel(14)" class="{{ $btnClass }}">14</button>
-      </div>
-      <div id="node-15" class="{{ $wrapperClass }}" style="top: 46%; left: 70%;">
-         <button id="btn-level-15" onclick="pilihLevel(15)" class="{{ $btnClass }}">15</button>
-      </div>
-      <div id="node-16" class="{{ $wrapperClass }}" style="top: 43%; left: 56%;">
-         <button id="btn-level-16" onclick="pilihLevel(16)" class="{{ $btnClass }}">16</button>
-      </div>
-      <div id="node-17" class="{{ $wrapperClass }}" style="top: 41%; left: 43%;">
-         <button id="btn-level-17" onclick="pilihLevel(17)" class="{{ $btnClass }}">17</button>
-      </div>
-      <div id="node-18" class="{{ $wrapperClass }}" style="top: 36%; left: 32%;">
-         <button id="btn-level-18" onclick="pilihLevel(18)" class="{{ $btnClass }}">18</button>
-      </div>
-      <div id="node-19" class="{{ $wrapperClass }}" style="top: 35.5%; left: 46%;">
-         <button id="btn-level-19" onclick="pilihLevel(19)" class="{{ $btnClass }}">19</button>
-      </div>
-      <div id="node-20" class="{{ $wrapperClass }}" style="top: 33%; left: 58%;">
-         <button id="btn-level-20" onclick="pilihLevel(20)" class="{{ $btnClass }}">20</button>
-      </div>
-      <div id="node-21" class="{{ $wrapperClass }}" style="top: 26%; left: 43%;">
-         <button id="btn-level-21" onclick="pilihLevel(21)" class="{{ $btnClass }}">21</button>
-      </div>
-      <div id="node-22" class="{{ $wrapperClass }}" style="top: 26%; left: 43%;">
-         <button id="btn-level-22" onclick="pilihLevel(22)" class="{{ $btnClass }}">22</button>
-      </div>
-      <div id="node-23" class="{{ $wrapperClass }}" style="top: 26%; left: 43%;">
-         <button id="btn-level-23" onclick="pilihLevel(23)" class="{{ $btnClass }}">23</button>
-      </div>
-    <div id="node-24" class="{{ $wrapperClass }}" style="top: 26%; left: 43%;">
-        <button id="btn-level-24" onclick="pilihLevel(24)" class="{{ $btnClass }}">24</button>     
-        
-   </div>
+        <div id="node-1" class="{{ $wrapperClass }}" style="top: 98%; left: 29%;">
+            <button id="btn-level-1" onclick="pilihLevel(1)" class="{{ $btnClass }}">1</button>
+        </div>
+        <div id="node-2" class="{{ $wrapperClass }}" style="top: 92.9%; left: 30%;">
+            <button id="btn-level-2" onclick="pilihLevel(2)" class="{{ $btnClass }}">2</button>
+        </div>
+        <div id="node-3" class="{{ $wrapperClass }}" style="top: 91.5%; left: 44%;">
+            <button id="btn-level-3" onclick="pilihLevel(3)" class="{{ $btnClass }}">3</button>
+        </div>
+        <div id="node-4" class="{{ $wrapperClass }}" style="top: 91%; left: 61%;">
+            <button id="btn-level-4" onclick="pilihLevel(4)" class="{{ $btnClass }}">4</button>
+        </div>
+        <div id="node-5" class="{{ $wrapperClass }}" style="top: 91%; left: 80%;">
+            <button id="btn-level-5" onclick="pilihLevel(5)" class="{{ $btnClass }}">5</button>
+        </div>
+        <div id="node-6" class="{{ $wrapperClass }}" style="top: 83%; left: 87%;">
+            <button id="btn-level-6" onclick="pilihLevel(6)" class="{{ $btnClass }}">6</button>
+        </div>
+        <div id="node-7" class="{{ $wrapperClass }}" style="top: 78.5%; left: 58%;">
+            <button id="btn-level-7" onclick="pilihLevel(7)" class="{{ $btnClass }}">7</button>
+        </div>
+        <div id="node-8" class="{{ $wrapperClass }}" style="top: 76%; left: 30%;">
+            <button id="btn-level-8" onclick="pilihLevel(8)" class="{{ $btnClass }}">8</button>
+        </div>
+        <div id="node-9" class="{{ $wrapperClass }}" style="top: 68%; left: 20%;">
+            <button id="btn-level-9" onclick="pilihLevel(9)" class="{{ $btnClass }}">9</button>
+        </div>
+        <div id="node-10" class="{{ $wrapperClass }}" style="top: 64%; left: 35%;">
+            <button id="btn-level-10" onclick="pilihLevel(10)" class="{{ $btnClass }}">10</button>
+        </div>
+        <div id="node-11" class="{{ $wrapperClass }}" style="top: 66.5%; left: 54%;">
+            <button id="btn-level-11" onclick="pilihLevel(11)" class="{{ $btnClass }}">11</button>
+        </div>
+        <div id="node-12" class="{{ $wrapperClass }}" style="top: 64%; left: 70%;">
+            <button id="btn-level-12" onclick="pilihLevel(12)" class="{{ $btnClass }}">12</button>
+        </div>
+        <div id="node-13" class="{{ $wrapperClass }}" style="top: 59%; left: 83%;">
+            <button id="btn-level-13" onclick="pilihLevel(13)" class="{{ $btnClass }}">13</button>
+        </div>
+        <div id="node-14" class="{{ $wrapperClass }}" style="top: 52%; left: 70%;">
+            <button id="btn-level-14" onclick="pilihLevel(14)" class="{{ $btnClass }}">14</button>
+        </div>
+        <div id="node-15" class="{{ $wrapperClass }}" style="top: 46%; left: 70%;">
+            <button id="btn-level-15" onclick="pilihLevel(15)" class="{{ $btnClass }}">15</button>
+        </div>
+        <div id="node-16" class="{{ $wrapperClass }}" style="top: 43%; left: 56%;">
+            <button id="btn-level-16" onclick="pilihLevel(16)" class="{{ $btnClass }}">16</button>
+        </div>
+        <div id="node-17" class="{{ $wrapperClass }}" style="top: 41%; left: 43%;">
+            <button id="btn-level-17" onclick="pilihLevel(17)" class="{{ $btnClass }}">17</button>
+        </div>
+        <div id="node-18" class="{{ $wrapperClass }}" style="top: 36%; left: 32%;">
+            <button id="btn-level-18" onclick="pilihLevel(18)" class="{{ $btnClass }}">18</button>
+        </div>
+        <div id="node-19" class="{{ $wrapperClass }}" style="top: 35.5%; left: 46%;">
+            <button id="btn-level-19" onclick="pilihLevel(19)" class="{{ $btnClass }}">19</button>
+        </div>
+        <div id="node-20" class="{{ $wrapperClass }}" style="top: 33%; left: 58%;">
+            <button id="btn-level-20" onclick="pilihLevel(20)" class="{{ $btnClass }}">20</button>
+        </div>
+        <div id="node-21" class="{{ $wrapperClass }}" style="top: 26%; left: 43%;">
+            <button id="btn-level-21" onclick="pilihLevel(21)" class="{{ $btnClass }}">21</button>
+        </div>
+        <div id="node-22" class="{{ $wrapperClass }}" style="top: 20%; left: 32%;">
+            <button id="btn-level-22" onclick="pilihLevel(22)" class="{{ $btnClass }}">22</button>
+        </div>
+        <div id="node-23" class="{{ $wrapperClass }}" style="top: 18.5%; left: 49%;">
+            <button id="btn-level-23" onclick="pilihLevel(23)" class="{{ $btnClass }}">23</button>
+        </div>
+        <div id="node-24" class="{{ $wrapperClass }}" style="top: 16%; left: 63%;">
+            <button id="btn-level-24" onclick="pilihLevel(24)" class="{{ $btnClass }}">24</button>
+        </div>
+        <div id="node-25" class="{{ $wrapperClass }}" style="top: 13%; left: 51%;">
+            <button id="btn-level-25" onclick="pilihLevel(25)" class="{{ $btnClass }}">25</button>
+        </div>
 
-   <script>
-      let currentPositionLevel = 1;
+    </div>
+
+    <script>
+        let currentPositionLevel = 1;
 
       // PERBAIKAN JAVASCRIPT: Ganti Garis Lurus (line) dengan Jalur Lengkung (path)
-      function drawMapPaths(highestLevel) {
-          const svg = document.getElementById('pathLayer');
-          svg.innerHTML = '';
+        function drawMapPaths(highestLevel) {
+            const svg = document.getElementById('pathLayer');
+            svg.innerHTML = '';
 
-          for(let i = 1; i < 25; i++) {
-              const startNode = document.getElementById(`node-${i}`);
-              const endNode = document.getElementById(`node-${i+1}`);
+            for(let i = 1; i < 25; i++) {
+                const startNode = document.getElementById(`node-${i}`);
+                const endNode = document.getElementById(`node-${i+1}`);
 
-              if(startNode && endNode) {
-                  const x1 = parseFloat(startNode.style.left);
-                  const y1 = parseFloat(startNode.style.top);
-                  const x2 = parseFloat(endNode.style.left);
-                  const y2 = parseFloat(endNode.style.top);
+                if(startNode && endNode) {
+                    const x1 = parseFloat(startNode.style.left);
+                    const y1 = parseFloat(startNode.style.top);
+                    const x2 = parseFloat(endNode.style.left);
+                    const y2 = parseFloat(endNode.style.top);
 
-                  const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                    const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
 
-                  const offsetX = 10;
+                    const offsetX = 10;
 
-                  const d = `M ${x1} ${y1} C ${x1 + offsetX} ${y1}, ${x2 - offsetX} ${y2}, ${x2} ${y2}`;
+                    const d = `M ${x1} ${y1} C ${x1 + offsetX} ${y1}, ${x2 - offsetX} ${y2}, ${x2} ${y2}`;
 
-                  path.setAttribute('d', d);
+                    path.setAttribute('d', d);
 
-                  if(i < highestLevel) {
-                      path.setAttribute('class', 'active-path');
-                  } else {
-                      path.setAttribute('class', 'locked-path');
-                  }
+                    if(i < highestLevel) {
+                        path.setAttribute('class', 'active-path');
+                    } else {
+                        path.setAttribute('class', 'locked-path');
+                    }
 
-                  svg.appendChild(path);
-              }
-          }
-      }
-
-      document.addEventListener('DOMContentLoaded', () => {
-         const currentLang = localStorage.getItem('jumpjump_language');
-
-         if (!currentLang) {
-            window.location.href = '/';
-            return;
-         }
-
-         const storageKey = `jumpjump_highest_level_${currentLang.toUpperCase()}`;
-         let highestLevel = parseInt(localStorage.getItem(storageKey)) || 1;
-
-         // 1. Gambar Jalur Lengkung SVG yang diperbarui
-         drawMapPaths(highestLevel);
-
-         currentPositionLevel = highestLevel;
-         const hero = document.getElementById('mapHero');
-         const startNode = document.getElementById(`node-${highestLevel}`);
-
-         if(startNode) {
-             hero.style.transition = 'none';
-             hero.style.top = startNode.style.top;
-             hero.style.left = startNode.style.left;
-
-             setTimeout(() => {
-                 hero.style.transition = 'top 0.6s ease-in-out, left 0.6s ease-in-out, opacity 0.3s ease';
-                 hero.style.opacity = '1';
-             }, 50);
-         }
-
-         for (let i = 1; i <= 20; i++) {
-            const btn = document.getElementById(`btn-level-${i}`);
-            const nodeWrapper = document.getElementById(`node-${i}`);
-
-            if (btn && nodeWrapper) {
-                if (i <= highestLevel) {
-                    btn.style.cursor = "pointer";
-                    btn.classList.remove('bg-gray-500', 'hover:bg-gray-400', 'border-gray-300', 'text-gray-200', 'shadow-[0_4px_0_0_#374151]');
-                    btn.classList.add('bg-[#ff6b4a]', 'hover:bg-[#ff522c]', 'border-[#ffb39e]', 'text-white', 'shadow-[0_4px_0_0_#b52a10]');
-
-                    const glow = document.createElement('div');
-                    glow.className = 'unlocked-node-glow';
-                    nodeWrapper.appendChild(glow);
-
-                } else {
-                    btn.style.cursor = "not-allowed";
-                    btn.classList.remove('bg-[#ff6b4a]', 'hover:bg-[#ff522c]', 'border-[#ffb39e]', 'text-white', 'shadow-[0_4px_0_0_#b52a10]');
-                    btn.classList.add('bg-gray-500', 'hover:bg-gray-400', 'border-gray-300', 'text-gray-200', 'shadow-[0_4px_0_0_#374151]');
-
-                    btn.onclick = (e) => {
-                        e.preventDefault();
-                        window.showCustomAlert('Level masih terkunci!', 'warning');
-                    };
+                    svg.appendChild(path);
                 }
             }
-         }
-      });
+        }
 
-      window.onload = () => {
-         setTimeout(() => {
-             const targetNode = document.getElementById(`node-${currentPositionLevel}`);
-             if (targetNode) {
-                 targetNode.scrollIntoView({ behavior: 'smooth', block: 'center' });
-             } else {
-                 window.scrollTo({
-                     top: document.body.scrollHeight,
-                     behavior: 'smooth'
-                 });
-             }
-         }, 300);
-      };
+        document.addEventListener('DOMContentLoaded', () => {
+            const currentLang = localStorage.getItem('jumpjump_language');
 
-      async function pilihLevel(level) {
-         const selectedLang = localStorage.getItem("jumpjump_language") || "C++";
-         const storageKey = `jumpjump_highest_level_${selectedLang.toUpperCase()}`;
-         let highestLevel = parseInt(localStorage.getItem(storageKey)) || 1;
+            if (!currentLang) {
+                window.location.href = '/';
+                return;
+            }
 
-         if (level > highestLevel) {
-            return window.showCustomAlert(`STAGE TERKUNCI! Selesaikan stage sebelumnya.`, 'warning');
-         }
+            const storageKey = `jumpjump_highest_level_${currentLang.toUpperCase()}`;
+            let highestLevel = parseInt(localStorage.getItem(storageKey)) || 1;
 
-         const hero = document.getElementById('mapHero');
-         const targetNode = document.getElementById(`node-${level}`);
+            // 1. Gambar Jalur Lengkung SVG yang diperbarui
+            drawMapPaths(highestLevel);
 
-         if (hero && targetNode) {
-             hero.classList.add('is-jumping');
-             hero.style.top = targetNode.style.top;
-             hero.style.left = targetNode.style.left;
-         }
+            currentPositionLevel = highestLevel;
+            const hero = document.getElementById('mapHero');
+            const startNode = document.getElementById(`node-${highestLevel}`);
 
-         setTimeout(async () => {
-             if (hero) hero.classList.remove('is-jumping');
+            if(startNode) {
+                hero.style.transition = 'none';
+                hero.style.top = startNode.style.top;
+                hero.style.left = startNode.style.left;
 
-             try {
-                let response = await fetch(`/check-stage/${selectedLang}/${level}`);
-                let data = await response.json();
+                setTimeout(() => {
+                    hero.style.transition = 'top 0.6s ease-in-out, left 0.6s ease-in-out, opacity 0.3s ease';
+                    hero.style.opacity = '1';
+                }, 50);
+            }
 
-                if (data.exists) {
-                   window.location.href = `/quiz/${selectedLang}/${level}`;
-                } else {
-                   window.showCustomAlert(`Stage ${level} untuk ${selectedLang} belum dibuat!`, 'error');
+            for (let i = 1; i <= 25; i++) {
+                const btn = document.getElementById(`btn-level-${i}`);
+                const nodeWrapper = document.getElementById(`node-${i}`);
+
+                if (btn && nodeWrapper) {
+                    if (i <= highestLevel) {
+                        btn.style.cursor = "pointer";
+                        btn.classList.remove('bg-gray-500', 'hover:bg-gray-400', 'border-gray-300', 'text-gray-200', 'shadow-[0_4px_0_0_#374151]');
+                        btn.classList.add('bg-[#ff6b4a]', 'hover:bg-[#ff522c]', 'border-[#ffb39e]', 'text-white', 'shadow-[0_4px_0_0_#b52a10]');
+
+                        const glow = document.createElement('div');
+                        glow.className = 'unlocked-node-glow';
+                        nodeWrapper.appendChild(glow);
+
+                    } else {
+                        btn.style.cursor = "not-allowed";
+                        btn.classList.remove('bg-[#ff6b4a]', 'hover:bg-[#ff522c]', 'border-[#ffb39e]', 'text-white', 'shadow-[0_4px_0_0_#b52a10]');
+                        btn.classList.add('bg-gray-500', 'hover:bg-gray-400', 'border-gray-300', 'text-gray-200', 'shadow-[0_4px_0_0_#374151]');
+
+                        btn.onclick = (e) => {
+                            e.preventDefault();
+                            window.showCustomAlert('Level masih terkunci!', 'warning');
+                        };
+                    }
                 }
-             } catch (error) {
-                window.showCustomAlert("Terjadi kesalahan koneksi sistem.", 'error');
-             }
-         }, 600);
-      }
-   </script>
+            }
+        });
+
+        window.onload = () => {
+            setTimeout(() => {
+                const targetNode = document.getElementById(`node-${currentPositionLevel}`);
+                if (targetNode) {
+                    targetNode.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                } else {
+                    window.scrollTo({
+                        top: document.body.scrollHeight,
+                        behavior: 'smooth'
+                    });
+                }
+            }, 300);
+        };
+
+        async function pilihLevel(level) {
+            const selectedLang = localStorage.getItem("jumpjump_language") || "C++";
+            const storageKey = `jumpjump_highest_level_${selectedLang.toUpperCase()}`;
+            let highestLevel = parseInt(localStorage.getItem(storageKey)) || 1;
+
+            if (level > highestLevel) {
+                return window.showCustomAlert(`STAGE TERKUNCI! Selesaikan stage sebelumnya.`, 'warning');
+            }
+
+            const hero = document.getElementById('mapHero');
+            const targetNode = document.getElementById(`node-${level}`);
+
+            if (hero && targetNode) {
+                hero.classList.add('is-jumping');
+                hero.style.top = targetNode.style.top;
+                hero.style.left = targetNode.style.left;
+            }
+
+            setTimeout(async () => {
+                if (hero) hero.classList.remove('is-jumping');
+
+                try {
+                    let response = await fetch(`/check-stage/${selectedLang}/${level}`);
+                    let data = await response.json();
+
+                    if (data.exists) {
+                    window.location.href = `/quiz/${selectedLang}/${level}`;
+                    } else {
+                    window.showCustomAlert(`Stage ${level} untuk ${selectedLang} belum dibuat!`, 'error');
+                    }
+                } catch (error) {
+                    window.showCustomAlert("Terjadi kesalahan koneksi sistem.", 'error');
+                }
+            }, 600);
+        }
+    </script>
 </body>
 </html>
