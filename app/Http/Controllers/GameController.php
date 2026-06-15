@@ -89,36 +89,42 @@ class GameController extends Controller
 
         // KHUSUS PILIHAN GANDA (STOP DI SINI, JANGAN PANGGIL AI)
         if ($isPilihanGanda) {
-            // Kalau pilihan ganda dan tidak sama persis di Lapis 1, berarti mutlak salah.
             return response()->json([
                 'is_correct' => false,
                 'method' => 'multiple_choice_wrong',
-                'feedback' => $question->penjelasan_salah ?? 'Aksi yang kamu pilih kurang tepat. Coba perhatikan lagi soalnya.'
+                // PERBAIKAN 1: Sesuaikan dengan nama kolom di database Anda (misal: 'explanation')
+                'feedback' => $question->explanation ?? 'Aksi yang kamu pilih kurang tepat. Coba perhatikan lagi soalnya.'
             ]);
         }
 
         // LAPIS 1.5: PENGECEKAN KEMIRIPAN (KHUSUS SOAL ISIAN KODE)
         similar_text($cleanUser, $cleanCorrect, $similarityPercent);
 
-        if ($similarityPercent < 40) {
+        // PERBAIKAN 2: Naikkan standar kemiripan menjadi 60% atau 70%
+        // Jika kemiripan di bawah 65%, anggap melenceng jauh -> Tampilkan keterangan Database
+        if ($similarityPercent < 65) {
             return response()->json([
                 'is_correct' => false,
                 'method' => 'low_similarity',
-                'feedback' => $question->penjelasan_salah ?? 'Sintaks salah dan logikanya melenceng jauh dari tujuan soal.'
+                // Mengambil keterangan dari database
+                'feedback' => $question->explanation ?? 'Sintaks salah dan logikanya melenceng jauh dari tujuan soal.'
             ]);
         }
-        // LAPIS 2: AI EVALUATOR (KHUSUS SOAL ISIAN YANG HAMPIR BENAR)
-        $prompt = "Kamu adalah sistem penilai otomatis untuk game edukasi pemrograman.
-        Bahasa Pemrograman: {$question->language}
+
+        // LAPIS 2: AI EVALUATOR (KHUSUS SOAL ISIAN YANG HAMPIR BENAR / TYPO)
+        // PERBAIKAN 3: Prompt AI diubah agar fokus mencari kesalahan kecil/typo
+        $prompt = "Kamu adalah instruktur coding cerdas.
+        Bahasa: {$question->language}
         Soal: {$question->question_text}
-        Kunci Jawaban Resmi: {$correctAnswer}
+        Kunci Jawaban: {$correctAnswer}
         Jawaban Peserta: {$userAnswer}
 
-        Tugasmu: Evaluasi apakah 'Jawaban Peserta' ekuivalen secara logika dan sintaks dengan 'Kunci Jawaban Resmi'.
+        Konteks: Jawaban peserta sudah hampir benar, tapi ada kesalahan kecil (typo, kurang simbol, atau salah tag).
+        Tugas: Evaluasi apakah kode peserta tetap valid sebagai jawaban alternatif, ATAU beri tahu letak kesalahannya secara spesifik.
         Balas HANYA dengan format JSON valid:
         {
             \"is_correct\": true/false,
-            \"feedback\": \"Berikan 1 kalimat singkat alasan\"
+            \"feedback\": \"Berikan 1 kalimat singkat langsung pada intinya (contoh: 'Kamu lupa menambahkan tanda titik koma di akhir', atau 'Sintaks valid, alternatif yang bagus!').\"
         }";
 
         try {

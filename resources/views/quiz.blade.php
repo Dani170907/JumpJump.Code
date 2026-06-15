@@ -478,7 +478,7 @@
                         modalTitle.className = "text-5xl md:text-7xl font-black tracking-tighter text-red-500 mb-4 animate-pulse";
                         modalTitle.style.textShadow = "0 0 15px rgba(239,68,68,0.5)";
                         modalDesc.innerText = "Oh no! Kamu kehabisan nyawa.";
-                        modalText.innerText = "Syntax Error! " + data.feedback;
+                        modalText.innerText = data.feedback;
                         modalBtn.innerText = "KEMBALI KE PETA";
                         modalBtn.className = "w-full bg-[#ef4444] hover:bg-[#dc2626] text-white text-2xl md:text-4xl font-bold py-3 md:py-5 rounded-2xl transition-all duration-150 transform hover:scale-105 active:scale-95 shadow-[0_6px_0_0_#991b1b] active:shadow-[0_2px_0_0_#991b1b] active:translate-y-1";
 
@@ -541,5 +541,5 @@
             }
         });
     </script>
-</body>     
+</body>
 </html>
