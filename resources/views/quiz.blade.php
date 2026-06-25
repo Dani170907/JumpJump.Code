@@ -393,7 +393,10 @@
             const modalBtn = document.getElementById('modalBtn');
             const modalDesc = modal.querySelector('p');
 
-            window.showCustomAlert("AI sedang menganalisis kode...", "info", 2000);
+            window.showCustomAlert("Sistem sedang menganalisis kode...", "info", 2000);
+
+            // Cek apakah pemain akan mati jika jawaban ini salah (nyawa sisa 1)
+            const isGameOver = (currentHp <= 1);
 
             fetch('/submit-answer', {
                 method: 'POST',
@@ -403,7 +406,8 @@
                 },
                 body: JSON.stringify({
                     question_id: "{{ $question->id }}",
-                    user_answer: jawabanPemain
+                    user_answer: jawabanPemain,
+                    is_game_over: isGameOver
                 })
             })
             .then(response => response.json())

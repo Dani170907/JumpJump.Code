@@ -9,6 +9,10 @@ use Illuminate\Support\Facades\Http;
 
 class GameController extends Controller
 {
+    /**
+     * Menampilkan halaman Quiz/Arena pertarungan.
+     * Mengelola session agar soal tidak berulang berturut-turut.
+     */
     public function showQuiz($language, $level)
     {
         // 1. Cek apakah ada ID soal terakhir yang disimpan di memori (Session)
@@ -24,15 +28,15 @@ class GameController extends Controller
                             ->first();
 
         // 3. Fallback: Jika soalnya cuma 1 di database (sehingga query di atas kosong),
-        // ambil saja soal yang ada tanpa pengecualian.
+        // ambil saja soal yang ada tanpa pengecualian ID.
         if (!$question) {
-             $question = Question::where('language', $language)
+            $question = Question::where('language', $language)
                             ->where('level', $level)
                             ->inRandomOrder()
                             ->first();
         }
 
-        // 4. Jika memang belum ada soal sama sekali untuk level ini
+        // 4. Jika memang belum ada soal sama sekali untuk level ini di database
         if (!$question) {
             return redirect('/map')->with('error', 'Stage ini belum tersedia!');
         }
@@ -43,42 +47,51 @@ class GameController extends Controller
         return view('quiz', compact('question', 'level', 'language'));
     }
 
-    // Fungsi untuk mengecek ketersediaan soal di background menggunakan AJAX
+    /**
+     * Mengecek ketersediaan soal di background via AJAX (untuk World Map).
+     */
     public function checkStage($language, $level)
     {
-        // Mengecek apakah soal tersebut ada di database (mengembalikan true/false)
         $exists = Question::where('language', $language)
                           ->where('level', $level)
                           ->exists();
 
-        // Mengirimkan jawaban ke JavaScript dalam format JSON
         return response()->json(['exists' => $exists]);
     }
 
+    /**
+     * Inti Evaluasi: Menerima jawaban, menilai secara berlapis,
+     * dan mengelola panggilan AI untuk Post-Mortem Analysis (Game Over).
+     */
     public function submitAnswer(Request $request)
     {
+        // 1. Ekstrak Input
         $questionId = $request->input('question_id');
         $userAnswer = $request->input('user_answer');
 
-        $question = Question::find($questionId);
+        // MENERIMA STATUS NYAWA DARI FRONTEND (Agar backend tahu kapan memicu Post-Mortem AI)
+        $isGameOver = filter_var($request->input('is_game_over', false), FILTER_VALIDATE_BOOLEAN);
 
+        // 2. Fetch Data Soal
+        $question = Question::find($questionId);
         if (!$question) {
-            return response()->json(['error' => 'Soal tidak ditemukan'], 404);
+            return response()->json(['error' => 'Soal tidak ditemukan di database'], 404);
         }
 
         $correctAnswer = $question->correct_answer;
-
-        // Cek apakah soal ini Pilihan Ganda (punya opsi) atau Isian (opsi kosong)
         $isPilihanGanda = !empty($question->options);
 
+        // ======================================================================
         // LAPIS 1: SANITASI & EXACT MATCH (BERLAKU UNTUK SEMUA TIPE SOAL)
+        // Sanitasi: lowercase, hapus spasi, seragamkan kutip (') -> (")
+        // ======================================================================
         $cleanUser = strtolower(preg_replace('/\s+/', '', $userAnswer));
         $cleanCorrect = strtolower(preg_replace('/\s+/', '', $correctAnswer));
 
         $cleanUser = str_replace("'", '"', $cleanUser);
         $cleanCorrect = str_replace("'", '"', $cleanCorrect);
 
-        // Jika sama persis -> Langsung Benar
+        // Jika sama persis -> Langsung Benar (Efisiensi 100%, 0 Token AI)
         if ($cleanUser === $cleanCorrect) {
             return response()->json([
                 'is_correct' => true,
@@ -87,87 +100,115 @@ class GameController extends Controller
             ]);
         }
 
-        // KHUSUS PILIHAN GANDA (STOP DI SINI, JANGAN PANGGIL AI)
+        // ======================================================================
+        // HANDLING PILIHAN GANDA SALAH
+        // Jika soal PG dan gagal Exact Match -> Mutlak Salah. Ambil database penjelasan.
+        // ======================================================================
         if ($isPilihanGanda) {
             return response()->json([
                 'is_correct' => false,
                 'method' => 'multiple_choice_wrong',
-                // PERBAIKAN 1: Sesuaikan dengan nama kolom di database Anda (misal: 'explanation')
-                'feedback' => $question->explanation ?? 'Aksi yang kamu pilih kurang tepat. Coba perhatikan lagi soalnya.'
+                // Jika GameOver: Beri Penjelasan DB. Jika Nyawa Masih Ada: Beri Alert Umum
+                'feedback' => $isGameOver
+                    ? ($question->penjelasan ?? 'Pilihan yang kamu pilih salah.')
+                    : 'Pilihan tersebut kurang tepat, coba lagi!'
             ]);
         }
 
-        // LAPIS 1.5: PENGECEKAN KEMIRIPAN (KHUSUS SOAL ISIAN KODE)
+        // ======================================================================
+        // KHUSUS SOAL ISIAN (CODING)
+        // ======================================================================
+
+        // LAPIS 1.5: PENGECEKAN KEMIRIPAN (COST OPTIMIZATION UNTUK ALERT)
         similar_text($cleanUser, $cleanCorrect, $similarityPercent);
 
-        // PERBAIKAN 2: Naikkan standar kemiripan menjadi 60% atau 70%
-        // Jika kemiripan di bawah 65%, anggap melenceng jauh -> Tampilkan keterangan Database
+        // JIKA JAWABAN MELENCENG JAUH / NGAWUR (< 65%)
+        // -> Anggap salah mutlak. Ambil database penjelasan (baik untuk Alert atau Game Over).
         if ($similarityPercent < 65) {
             return response()->json([
                 'is_correct' => false,
                 'method' => 'low_similarity',
-                // Mengambil keterangan dari database
-                'feedback' => $question->explanation ?? 'Sintaks salah dan logikanya melenceng jauh dari tujuan soal.'
+                // Jika GameOver: Beri Penjelasan DB. Jika Nyawa Masih Ada: Beri Alert Umum
+                'feedback' => $isGameOver
+                    ? ($question->penjelasan ?? 'Sintaks salah dan logikanya melenceng jauh.')
+                    : 'Jawabanmu kurang tepat, coba periksa lagi sintaksnya.'
             ]);
         }
 
-        // LAPIS 2: AI EVALUATOR (KHUSUS SOAL ISIAN YANG HAMPIR BENAR / TYPO)
-        // PERBAIKAN 3: Prompt AI diubah agar fokus mencari kesalahan kecil/typo
-        $prompt = "Kamu adalah instruktur coding cerdas.
+        // JIKA JAWABAN MENDEKATI BENAR (>= 65%) TAPI NYAWA MASIH ADA (Bukan Game Over)
+        // CEGAT PANGGILAN API GEMINI DI SINI! Tampilkan alert statis saja untuk hemat token.
+        if (!$isGameOver) {
+            return response()->json([
+                'is_correct' => false,
+                'method' => 'close_but_no_ai',
+                'feedback' => 'Penulisan kodemu sudah hampir benar! Coba teliti lagi, mungkin ada typo atau simbol yang kurang.'
+            ]);
+        }
+        // ======================================================================
+        // LAPIS 2: AI POST-MORTEM EVALUATOR
+        // HANYA BERJALAN JIKA: ISIAN + MENDEKATI BENAR (TYPO) + NYAWA HABIS (GAME OVER)
+        // ======================================================================
+
+        // Prompt AI difokuskan sebagai instruktur yang menjelaskan letak typo
+        $prompt = "Kamu adalah instruktur coding cerdas untuk game edukasi pemrograman.
         Bahasa: {$question->language}
         Soal: {$question->question_text}
-        Kunci Jawaban: {$correctAnswer}
+        Kunci Jawaban Resmi: {$correctAnswer}
         Jawaban Peserta: {$userAnswer}
 
-        Konteks: Jawaban peserta sudah hampir benar, tapi ada kesalahan kecil (typo, kurang simbol, atau salah tag).
-        Tugas: Evaluasi apakah kode peserta tetap valid sebagai jawaban alternatif, ATAU beri tahu letak kesalahannya secara spesifik.
+        Konteks: Sisa nyawa peserta habis (Game Over). Jawaban peserta sudah hampir benar (kemiripan tinggi), tapi terdapat kesalahan kecil seperti typo, kurang simbol, salah quotes, atau tag tak tertutup.
+        Tugas: Beritahu letak kesalahannya secara spesifik dan ringkas dalam 1 kalimat (Post-Mortem Analysis).
         Balas HANYA dengan format JSON valid:
         {
-            \"is_correct\": true/false,
-            \"feedback\": \"Berikan 1 kalimat singkat langsung pada intinya (contoh: 'Kamu lupa menambahkan tanda titik koma di akhir', atau 'Sintaks valid, alternatif yang bagus!').\"
+            \"is_correct\": false,
+            \"feedback\": \"Berikan 1 kalimat singkat langsung pada intinya (contoh: 'Kamu lupa menambahkan tanda titik koma di akhir').\"
         }";
 
         try {
+            // Setup & Loop API Keys untuk mitigasi Rate Limit (429)
             $apiKeys = explode(',', env('GEMINI_API_KEYS'));
             $response = null;
 
             foreach ($apiKeys as $key) {
-                // KITA GUNAKAN MODEL GEMINI TERBARU DARI DAFTAR ANDA
+                // Menggunakan model Gemini 2.5 Flash terbaru dari daftar Anda
                 $url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" . trim($key);
 
                 $response = Http::withHeaders([
                     'Content-Type' => 'application/json',
                 ])->post($url, [
                     'contents' => [['parts' => [['text' => $prompt]]]],
-                    // Fitur paksaan JSON kita aktifkan kembali!
+                    // Paksa output JSON agar mudah didecode
                     'generationConfig' => ['response_mime_type' => 'application/json']
                 ]);
 
+                // Berhenti loop jika sukses atau bukan 429
                 if ($response->successful() || $response->status() !== 429) {
                     break;
                 }
             }
 
             if ($response && $response->successful()) {
+                // Parse respon JSON dari AI
                 $aiText = $response->json('candidates.0.content.parts.0.text');
                 $aiResult = json_decode($aiText, true);
 
                 return response()->json([
-                    'is_correct' => $aiResult['is_correct'] ?? false,
+                    'is_correct' => false, // Dipaksa false karena nyawa sudah habis
                     'method' => 'ai_evaluation',
-                    'feedback' => $aiResult['feedback'] ?? 'Analisis logika selesai.'
+                    'feedback' => $aiResult['feedback'] ?? 'Ada kesalahan kecil pada penulisan sintaks kodemu.'
                 ]);
             } else {
+                // Handle jika API Google gagal total setelah mencoba semua key
                 $pesanErrorGoogle = $response ? $response->body() : 'Tidak ada respon dari server';
                 throw new \Exception("Google API Error: " . $pesanErrorGoogle);
             }
 
         } catch (\Exception $e) {
-            // JIKA SUDAH BERHASIL, UBAH TEKS INI KEMBALI SEPERTI SEMULA
+            // FALLBACK MEKANISME: Jika AI Error saat Game Over, kembali pakai database penjelasan
             return response()->json([
                 'is_correct' => false,
                 'method' => 'fallback_error',
-                'feedback' => 'DEBUG ERROR: ' . $e->getMessage()
+                'feedback' => $question->penjelasan ?? 'Sintaks kodemu hampir benar, namun terdapat sedikit kesalahan ketik.'
             ]);
         }
     }
